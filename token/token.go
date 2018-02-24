@@ -9,6 +9,8 @@ const (
 	// Instructions
 	ICONST = "ICONST"
 	IADD   = "IADD"
+	ISUB   = "ISUB"
+	IMUL   = "IMUL"
 	PRINT  = "PRINT"
 	HALT   = "HALT"
 )
@@ -16,6 +18,8 @@ const (
 var instructions = map[string]string{
 	"ICONST": ICONST,
 	"IADD":   IADD,
+	"ISUB":   ISUB,
+	"IMUL":   IMUL,
 	"PRINT":  PRINT,
 	"HALT":   HALT,
 }

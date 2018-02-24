@@ -22,6 +22,12 @@ func tokenToInstruction(t token.Token) int {
 	case token.IADD:
 		instruction = vm.IADD
 		break
+	case token.ISUB:
+		instruction = vm.ISUB
+		break
+	case token.IMUL:
+		instruction = vm.IMUL
+		break
 	case token.PRINT:
 		instruction = vm.PRINT
 		break

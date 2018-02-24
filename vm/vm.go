@@ -27,6 +27,14 @@ func (vm *VM) Run() {
 			addResult := vm.stack.Pop().(int) + vm.stack.Pop().(int)
 			vm.stack.Push(addResult)
 			break
+		case ISUB:
+			subResult := vm.stack.Pop().(int) - vm.stack.Pop().(int)
+			vm.stack.Push(subResult)
+			break
+		case IMUL:
+			mulResult := vm.stack.Pop().(int) * vm.stack.Pop().(int)
+			vm.stack.Push(mulResult)
+			break
 		case PRINT:
 			fmt.Println(vm.stack.Pop())
 			break
