@@ -5,12 +5,14 @@ const (
 	INT     = "INT"
 	EOL     = "EOL"
 	EOF     = "EOF"
+	COMMENT = "COMMENT"
 	ILLEGAL = "ILLEGAL"
 	// Instructions
 	ICONST = "ICONST"
 	IADD   = "IADD"
 	ISUB   = "ISUB"
 	IMUL   = "IMUL"
+	JMP    = "JMP"
 	PRINT  = "PRINT"
 	HALT   = "HALT"
 )
@@ -20,6 +22,7 @@ var instructions = map[string]string{
 	"IADD":   IADD,
 	"ISUB":   ISUB,
 	"IMUL":   IMUL,
+	"JMP":    JMP,
 	"PRINT":  PRINT,
 	"HALT":   HALT,
 }

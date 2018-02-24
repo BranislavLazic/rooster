@@ -9,8 +9,8 @@ type Lexer struct {
 	ch           byte
 }
 
-func NewLexer(line string) *Lexer {
-	lexer := &Lexer{input: line}
+func NewLexer(input string) *Lexer {
+	lexer := &Lexer{input: input}
 	lexer.readChar()
 	return lexer
 }
@@ -19,6 +19,18 @@ func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 	l.skipWhitespace()
 	switch l.ch {
+	// Comments
+	case '/':
+		if l.nextChar() == '/' {
+			for l.ch != '\n' && l.ch != 0 {
+				l.readChar()
+			}
+			tok.Literal = ""
+			tok.Type = token.COMMENT
+		} else {
+			tok.Literal = ""
+			tok.Type = token.ILLEGAL
+		}
 	case '\n':
 		tok.Literal = ""
 		tok.Type = token.EOL
@@ -42,6 +54,13 @@ func (l *Lexer) NextToken() token.Token {
 	}
 	l.readChar()
 	return tok
+}
+
+func (l *Lexer) nextChar() byte {
+	if l.readPosition >= len(l.input) {
+		return 0
+	}
+	return l.input[l.readPosition]
 }
 
 func (l *Lexer) readChar() {

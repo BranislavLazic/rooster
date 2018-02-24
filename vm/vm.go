@@ -35,6 +35,10 @@ func (vm *VM) Run() {
 			mulResult := vm.stack.Pop().(int) * vm.stack.Pop().(int)
 			vm.stack.Push(mulResult)
 			break
+		case JMP:
+			jump := vm.fetch()
+			vm.instructionPointer = jump - 1
+			break
 		case PRINT:
 			fmt.Println(vm.stack.Pop())
 			break

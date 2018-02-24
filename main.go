@@ -28,6 +28,9 @@ func tokenToInstruction(t token.Token) int {
 	case token.IMUL:
 		instruction = vm.IMUL
 		break
+	case token.JMP:
+		instruction = vm.JMP
+		break
 	case token.PRINT:
 		instruction = vm.PRINT
 		break
@@ -38,6 +41,10 @@ func tokenToInstruction(t token.Token) int {
 		instruction, _ = strconv.Atoi(t.Literal)
 	}
 	return instruction
+}
+
+func isValidToken(tok token.Token) bool {
+	return tok.Type != token.EOL && tok.Type != token.EOF && tok.Type != token.ILLEGAL && tok.Type != token.COMMENT
 }
 
 func main() {
@@ -60,7 +67,7 @@ func main() {
 	var instructions []int
 	lxr := lexer.NewLexer(program)
 	for tok := lxr.NextToken(); tok.Type != token.EOF; tok = lxr.NextToken() {
-		if tok.Type != token.EOL && tok.Type != token.EOF {
+		if isValidToken(tok) {
 			instructions = append(instructions, tokenToInstruction(tok))
 		}
 
