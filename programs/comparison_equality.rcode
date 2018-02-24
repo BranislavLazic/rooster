@@ -1,0 +1,12 @@
+// Compare two numbers (1 if first is greater than second, otherwise 0)
+ICONST 1     // 0
+ICONST 3     // 2
+ILT          // 4
+PRINT        // 5
+
+// Check equality (1 if they are equal, otherwise 0)
+ICONST 3     // 6
+ICONST 3     // 8
+IEQ          // 10
+PRINT        // 11
+HALT         // 12

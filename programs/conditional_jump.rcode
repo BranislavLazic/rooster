@@ -1,0 +1,23 @@
+// Conditional jump
+ICONST 6     // 0
+ICONST 6     // 2
+
+IEQ          // 4 - compare equality of two previously added integers and set the result to the stack
+JMPT 12      // 5 - "pop" the value from the stack and check whether condition is satisfied.
+             //     If the condition is satisfied, jump to 12.
+
+ICONST 10    // 7
+PRINT        // 9
+JMP 24       // 10 - jumps to the end of the program and stops it skipping the further execution
+
+ICONST 20    // 12 - executes when condition is true
+PRINT        // 14
+
+ICONST 3     // 15
+ICONST 5     // 17
+IEQ          // 19
+JMPF 25      // 20 - jumps to the end if the value on stack is 0 (if the numbers are different)
+ICONST 30    // 22
+PRINT        // 24
+
+HALT         // 25

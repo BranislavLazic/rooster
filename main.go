@@ -31,6 +31,12 @@ func tokenToInstruction(t token.Token) int {
 	case token.JMP:
 		instruction = vm.JMP
 		break
+	case token.JMPT:
+		instruction = vm.JMPT
+		break
+	case token.JMPF:
+		instruction = vm.JMPF
+		break
 	case token.IEQ:
 		instruction = vm.IEQ
 		break
