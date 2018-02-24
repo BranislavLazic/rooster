@@ -2,6 +2,14 @@
 
 Example of very primitive virtual machine
 
+How to execute programs:
+
+`go build main.go`
+
+`./main program.rcode`
+
+Example of program:
+
 ```
 ICONST 7     // 0 - push 7 in stack
 ICONST 5     // 2 - push 5 in stack
