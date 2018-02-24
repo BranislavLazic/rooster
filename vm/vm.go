@@ -24,20 +24,34 @@ func (vm *VM) Run() {
 			vm.stack.Push(value)
 			break
 		case IADD:
-			addResult := vm.stack.Pop().(int) + vm.stack.Pop().(int)
+			addResult := vm.stack.Pop() + vm.stack.Pop()
 			vm.stack.Push(addResult)
 			break
 		case ISUB:
-			subResult := vm.stack.Pop().(int) - vm.stack.Pop().(int)
+			subResult := vm.stack.Pop() - vm.stack.Pop()
 			vm.stack.Push(subResult)
 			break
 		case IMUL:
-			mulResult := vm.stack.Pop().(int) * vm.stack.Pop().(int)
+			mulResult := vm.stack.Pop() * vm.stack.Pop()
 			vm.stack.Push(mulResult)
 			break
 		case JMP:
 			jump := vm.fetch()
 			vm.instructionPointer = jump - 1
+			break
+		case ILT:
+			if vm.stack.Pop() < vm.stack.Pop() {
+				vm.stack.Push(1)
+			} else {
+				vm.stack.Push(0)
+			}
+			break
+		case IEQ:
+			if vm.stack.Pop() == vm.stack.Pop() {
+				vm.stack.Push(1)
+			} else {
+				vm.stack.Push(0)
+			}
 			break
 		case PRINT:
 			fmt.Println(vm.stack.Pop())

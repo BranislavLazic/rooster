@@ -13,6 +13,8 @@ const (
 	ISUB   = "ISUB"
 	IMUL   = "IMUL"
 	JMP    = "JMP"
+	IEQ    = "IEQ"
+	ILT    = "ILT"
 	PRINT  = "PRINT"
 	HALT   = "HALT"
 )
@@ -23,6 +25,8 @@ var instructions = map[string]string{
 	"ISUB":   ISUB,
 	"IMUL":   IMUL,
 	"JMP":    JMP,
+	"IEQ":    IEQ,
+	"ILT":    ILT,
 	"PRINT":  PRINT,
 	"HALT":   HALT,
 }

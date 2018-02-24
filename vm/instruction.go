@@ -7,6 +7,8 @@ const (
 	ISUB   = 3
 	IMUL   = 4
 	JMP    = 5
-	PRINT  = 6
-	HALT   = 7
+	IEQ    = 6
+	ILT    = 7
+	PRINT  = 8
+	HALT   = 9
 )

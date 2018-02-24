@@ -31,6 +31,12 @@ func tokenToInstruction(t token.Token) int {
 	case token.JMP:
 		instruction = vm.JMP
 		break
+	case token.IEQ:
+		instruction = vm.IEQ
+		break
+	case token.ILT:
+		instruction = vm.ILT
+		break
 	case token.PRINT:
 		instruction = vm.PRINT
 		break
@@ -43,8 +49,12 @@ func tokenToInstruction(t token.Token) int {
 	return instruction
 }
 
+func isSyntaxError(tok token.Token) bool {
+	return tok.Type == token.ILLEGAL
+}
+
 func isValidToken(tok token.Token) bool {
-	return tok.Type != token.EOL && tok.Type != token.EOF && tok.Type != token.ILLEGAL && tok.Type != token.COMMENT
+	return tok.Type != token.EOL && tok.Type != token.EOF && tok.Type != token.COMMENT
 }
 
 func main() {
@@ -53,8 +63,8 @@ func main() {
 		os.Exit(1)
 	}
 	fileName := os.Args[1]
-	if !strings.HasSuffix(fileName, ".vmcode") {
-		log.Fatalf("invalid file name. extension must be vmcode")
+	if !strings.HasSuffix(fileName, ".rcode") {
+		log.Fatalf("invalid file name. extension must be rcode")
 		os.Exit(1)
 	}
 	fileContent, err := ioutil.ReadFile(fileName)
@@ -67,6 +77,10 @@ func main() {
 	var instructions []int
 	lxr := lexer.NewLexer(program)
 	for tok := lxr.NextToken(); tok.Type != token.EOF; tok = lxr.NextToken() {
+		if isSyntaxError(tok) {
+			log.Fatalf("%s is not a valid syntax", tok.Literal)
+			os.Exit(1)
+		}
 		if isValidToken(tok) {
 			instructions = append(instructions, tokenToInstruction(tok))
 		}
@@ -74,5 +88,4 @@ func main() {
 	}
 	virtualMachine := vm.NewVM(instructions)
 	virtualMachine.Run()
-
 }

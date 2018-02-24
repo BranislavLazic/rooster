@@ -6,7 +6,7 @@ type Stack struct {
 }
 
 type Element struct {
-	value interface{}
+	value int
 	next  *Element
 }
 
@@ -21,7 +21,7 @@ func (s *Stack) Size() int {
 }
 
 // Push adds new element on top of the stack
-func (s *Stack) Push(value interface{}) {
+func (s *Stack) Push(value int) {
 	s.top = &Element{value, s.top}
 	s.size++
 }
@@ -32,7 +32,7 @@ func (s *Stack) Peek() *Element {
 }
 
 // Pop removes the top element and returns its value
-func (s *Stack) Pop() interface{} {
+func (s *Stack) Pop() int {
 	element := s.top
 	s.top = element.next
 	s.size--
