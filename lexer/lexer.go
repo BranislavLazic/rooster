@@ -20,17 +20,13 @@ func (l *Lexer) NextToken() token.Token {
 	l.skipWhitespace()
 	switch l.ch {
 	// Comments
-	case '/':
-		if l.nextChar() == '/' {
-			for l.ch != '\n' && l.ch != 0 {
-				l.readChar()
-			}
-			tok.Literal = ""
-			tok.Type = token.COMMENT
-		} else {
-			tok.Literal = ""
-			tok.Type = token.ILLEGAL
+	case '#':
+		for l.ch != '\n' && l.ch != 0 {
+			l.readChar()
 		}
+		tok.Literal = ""
+		tok.Type = token.COMMENT
+
 	case '\n':
 		tok.Literal = ""
 		tok.Type = token.EOL

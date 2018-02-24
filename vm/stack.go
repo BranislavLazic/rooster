@@ -1,8 +1,13 @@
 package vm
 
+import (
+	"log"
+)
+
 type Stack struct {
-	top  *Element
-	size int
+	top     *Element
+	maxSize int
+	size    int
 }
 
 type Element struct {
@@ -11,8 +16,8 @@ type Element struct {
 }
 
 // NewStack returns an initialized Stack object
-func NewStack() *Stack {
-	return new(Stack)
+func NewStack(maxSize int) *Stack {
+	return &Stack{maxSize: maxSize, size: 0}
 }
 
 // Size returns the number of elements in the stack
@@ -22,8 +27,12 @@ func (s *Stack) Size() int {
 
 // Push adds new element on top of the stack
 func (s *Stack) Push(value int) {
-	s.top = &Element{value, s.top}
 	s.size++
+	if s.maxSize < s.size {
+		log.Fatalf("stack overflow")
+	} else {
+		s.top = &Element{value, s.top}
+	}
 }
 
 // Peek returns the top element in stack

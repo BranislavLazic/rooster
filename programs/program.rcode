@@ -1,11 +1,11 @@
-ICONST 7     // 0 - push 7 in stack
-ICONST 5     // 2 - push 5 in stack
-IADD         // 4 - add numbers
-PRINT        // 5
-JMP 9        // 6 - skips HALT
-HALT         // 8
-ICONST 2     // 9
-ICONST 3     // 11
-IMUL         // 12
-PRINT        // 13
-HALT         // 14
+ICONST 7     # 0 - push 7 in stack
+ICONST 5     # 2 - push 5 in stack
+IADD         # 4 - add numbers
+PRINT        # 5
+JMP 9        # 6 - skips HALT
+HALT         # 8
+ICONST 2     # 9
+ICONST 3     # 11
+IMUL         # 13
+PRINT        # 14
+HALT         # 15

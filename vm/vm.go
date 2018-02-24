@@ -11,7 +11,7 @@ type VM struct {
 }
 
 func NewVM(program []int) *VM {
-	return &VM{stack: NewStack(), instructionPointer: -1, program: program}
+	return &VM{stack: NewStack(100), instructionPointer: -1, program: program}
 }
 
 func (vm *VM) Run() {
