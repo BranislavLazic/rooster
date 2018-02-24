@@ -1,7 +1,6 @@
 package token
 
 const (
-	IDENT   = "IDENT"
 	INT     = "INT"
 	EOL     = "EOL"
 	EOF     = "EOF"
@@ -39,7 +38,7 @@ func LookupInstruction(instruction string) string {
 	if tok, ok := instructions[instruction]; ok {
 		return tok
 	}
-	return IDENT
+	return ILLEGAL
 }
 
 type Token struct {
