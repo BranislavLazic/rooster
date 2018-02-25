@@ -16,6 +16,8 @@ const (
 	JMPF   = "JMPF"
 	IEQ    = "IEQ"
 	ILT    = "ILT"
+	GLOAD  = "GLOAD"
+	GSTORE = "GSTORE"
 	PRINT  = "PRINT"
 	HALT   = "HALT"
 )
@@ -30,6 +32,8 @@ var instructions = map[string]string{
 	"JMPF":   JMPF,
 	"IEQ":    IEQ,
 	"ILT":    ILT,
+	"GLOAD":  GLOAD,
+	"GSTORE": GSTORE,
 	"PRINT":  PRINT,
 	"HALT":   HALT,
 }

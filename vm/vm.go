@@ -4,15 +4,22 @@ import (
 	"fmt"
 )
 
+// VM contains properties of CPU
 type VM struct {
 	stack              *Stack
 	instructionPointer int
 	program            []int
+	globals            map[int]int
 }
 
 // NewVM initializes the virtual machine
 func NewVM(program []int) *VM {
-	return &VM{stack: NewStack(), instructionPointer: -1, program: program}
+	return &VM{
+		stack:              NewStack(),
+		instructionPointer: -1,
+		program:            program,
+		globals:            make(map[int]int),
+	}
 }
 
 // Run runs the virtual machine and interprets its
@@ -72,6 +79,16 @@ func (vm *VM) Run() {
 			} else {
 				vm.stack.Push(0)
 			}
+			break
+		case GLOAD:
+			address := vm.fetch()
+			globalValue := vm.globals[address]
+			vm.stack.Push(globalValue)
+			break
+		case GSTORE:
+			value := vm.stack.Pop()
+			address := vm.fetch()
+			vm.globals[address] = value
 			break
 		case PRINT:
 			fmt.Println(vm.stack.Pop())

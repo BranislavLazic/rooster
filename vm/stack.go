@@ -29,5 +29,12 @@ func (s *Stack) Size() int {
 // Pop removes the top element and returns its value
 func (s *Stack) Pop() int {
 	s.size--
-	return s.values[s.size]
+	popValue := s.values[s.size]
+	s.values = s.values[:s.size]
+	return popValue
+}
+
+// AtIndex returns a value which is at provided index
+func (s *Stack) AtIndex(index int) int {
+	return s.values[index]
 }

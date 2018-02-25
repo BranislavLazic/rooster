@@ -1,0 +1,9 @@
+ICONST 42   // 0  - push 42 to the stack
+GSTORE 0    // 2  - move 42 from the stack and add it to globals
+ICONST 43   // 4  - push 43 to the stack
+GSTORE 1    // 6  - move 43 to the stack and add it to globals
+GLOAD 0     // 8  - move value from globals at address 0 (42) to the stack
+GLOAD 1     // 10 - move value from globals at address 1 (43) to the stack
+IADD        // 12 - add numbers
+PRINT       // 13 - print the result
+HALT        // 14 - stop the program
