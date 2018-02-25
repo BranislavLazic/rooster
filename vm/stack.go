@@ -1,5 +1,6 @@
 package vm
 
+// Stack is a representation of stack indexed collection
 type Stack struct {
 	values []int
 	size   int
