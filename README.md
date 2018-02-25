@@ -1,10 +1,12 @@
-# Rooster
+# Rooster [![Build Status](https://travis-ci.org/BranislavLazic/rooster.svg)](https://travis-ci.org/BranislavLazic/rooster)
 
 Example of very primitive virtual machine
 
-How to execute programs:
+Build executable:
 
 `go build main.go`
+
+and execute programs:
 
 `./main program.rcode`
 
