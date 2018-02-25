@@ -5,9 +5,9 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/branislavlazic/rooster/lexer"
-	"github.com/branislavlazic/rooster/token"
-	"github.com/branislavlazic/rooster/vm"
+	"github.com/BranislavLazic/rooster/lexer"
+	"github.com/BranislavLazic/rooster/token"
+	"github.com/BranislavLazic/rooster/vm"
 )
 
 // Program converts source code to array of instructions

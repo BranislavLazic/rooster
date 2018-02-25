@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/branislavlazic/rooster/parser"
-	"github.com/branislavlazic/rooster/vm"
+	"github.com/BranislavLazic/rooster/parser"
+	"github.com/BranislavLazic/rooster/vm"
 )
 
 func main() {
