@@ -10,10 +10,13 @@ type VM struct {
 	program            []int
 }
 
+// NewVM initializes the virtual machine
 func NewVM(program []int) *VM {
-	return &VM{stack: NewStack(100), instructionPointer: -1, program: program}
+	return &VM{stack: NewStack(), instructionPointer: -1, program: program}
 }
 
+// Run runs the virtual machine and interprets its
+// program by executing instruction after instruction
 func (vm *VM) Run() {
 
 	for vm.instructionPointer < len(vm.program) {

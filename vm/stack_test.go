@@ -15,10 +15,10 @@ func TestPush(t *testing.T) {
 func TestPeek(t *testing.T) {
 	stack := createStackWithElements()
 
-	peekResult := *stack.Peek()
+	peekResult := stack.Peek()
 
-	if peekResult.value != 3 {
-		t.Fatalf("stack.Peek did not returned expected element. got=%d", peekResult.value)
+	if peekResult != 3 {
+		t.Fatalf("stack.Peek did not returned expected element. got=%d", peekResult)
 	}
 }
 
@@ -37,7 +37,7 @@ func TestPop(t *testing.T) {
 }
 
 func createStackWithElements() *Stack {
-	stack := NewStack(100)
+	stack := NewStack()
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(3)

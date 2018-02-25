@@ -10,8 +10,8 @@ func TestVM_ICONST(t *testing.T) {
 
 	vm := NewVM(program)
 	vm.Run()
-	if vm.stack.Peek().value != 42 {
-		t.Fatalf("incorrect value on the stack. got=%d", vm.stack.Peek().value)
+	if vm.stack.Peek() != 42 {
+		t.Fatalf("incorrect value on the stack. got=%d", vm.stack.Peek())
 	}
 }
 
@@ -58,8 +58,8 @@ func TestVM_IADD(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
 	}
 
-	if vm.stack.Peek().value != 85 {
-		t.Fatalf("incorrect result. result is %d but it should be 85", vm.stack.Peek().value)
+	if vm.stack.Peek() != 85 {
+		t.Fatalf("incorrect result. result is %d but it should be 85", vm.stack.Peek())
 	}
 }
 
@@ -77,8 +77,8 @@ func TestVM_ISUB(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
 	}
 
-	if vm.stack.Peek().value != 2 {
-		t.Fatalf("incorrect result. result is %d but it should be 2", vm.stack.Peek().value)
+	if vm.stack.Peek() != 2 {
+		t.Fatalf("incorrect result. result is %d but it should be 2", vm.stack.Peek())
 	}
 }
 
@@ -96,8 +96,8 @@ func TestVM_IMUL(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
 	}
 
-	if vm.stack.Peek().value != 8 {
-		t.Fatalf("incorrect result. result is %d but it should be 8", vm.stack.Peek().value)
+	if vm.stack.Peek() != 8 {
+		t.Fatalf("incorrect result. result is %d but it should be 8", vm.stack.Peek())
 	}
 }
 
@@ -115,8 +115,8 @@ func TestVM_ILT(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
 	}
 
-	if vm.stack.Peek().value != 1 {
-		t.Fatalf("incorrect result. result is %d but it should be 1", vm.stack.Peek().value)
+	if vm.stack.Peek() != 1 {
+		t.Fatalf("incorrect result. result is %d but it should be 1", vm.stack.Peek())
 	}
 }
 
@@ -134,8 +134,8 @@ func TestVM_ILT_NotLessThan(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
 	}
 
-	if vm.stack.Peek().value != 0 {
-		t.Fatalf("incorrect result. result is %d but it should be 0", vm.stack.Peek().value)
+	if vm.stack.Peek() != 0 {
+		t.Fatalf("incorrect result. result is %d but it should be 0", vm.stack.Peek())
 	}
 }
 
@@ -153,8 +153,8 @@ func TestVM_IEQ(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
 	}
 
-	if vm.stack.Peek().value != 1 {
-		t.Fatalf("incorrect result. result is %d but it should be 1", vm.stack.Peek().value)
+	if vm.stack.Peek() != 1 {
+		t.Fatalf("incorrect result. result is %d but it should be 1", vm.stack.Peek())
 	}
 }
 
@@ -172,8 +172,8 @@ func TestVM_IEQ_NotEqual(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
 	}
 
-	if vm.stack.Peek().value != 0 {
-		t.Fatalf("incorrect result. result is %d but it should be 0", vm.stack.Peek().value)
+	if vm.stack.Peek() != 0 {
+		t.Fatalf("incorrect result. result is %d but it should be 0", vm.stack.Peek())
 	}
 }
 
