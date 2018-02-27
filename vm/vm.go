@@ -23,7 +23,9 @@ func NewVM(program []int) *VM {
 		framePointer:       0,
 		program:            program,
 		locals:             make(map[int]int),
-		flags:              make(map[string]interface{}),
+		flags: map[string]interface{}{
+			"printStack": false,
+		},
 	}
 }
 
