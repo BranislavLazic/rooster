@@ -1,6 +1,8 @@
 package vm
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestVM_ICONST(t *testing.T) {
 	program := []int{
@@ -269,7 +271,7 @@ func TestVM_JMPF_NotFalse(t *testing.T) {
 }
 
 func TestVM_GSTORE(t *testing.T) {
-	// Size of the globals space should be 1 since value at 0 address is set for both 42 and 43
+	// Size of the locals space should be 1 since value at 0 address is set for both 42 and 43
 	program := []int{
 		ICONST, 42,
 		GSTORE, 0,
@@ -284,12 +286,12 @@ func TestVM_GSTORE(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 0", vm.stack.Size())
 	}
 
-	if len(vm.globals) != 1 {
-		t.Fatalf("incorrect size of globals space. size of globals space is %d but is should be 1", len(vm.globals))
+	if len(vm.locals) != 1 {
+		t.Fatalf("incorrect size of locals space. size of locals space is %d but is should be 1", len(vm.locals))
 	}
 
-	if vm.globals[0] != 43 {
-		t.Fatalf("incorrect value at 0 address. value is %d but it should be 43", vm.globals[0])
+	if vm.locals[0] != 43 {
+		t.Fatalf("incorrect value at 0 address. value is %d but it should be 43", vm.locals[0])
 	}
 }
 
@@ -309,5 +311,43 @@ func TestVM_GLOAD(t *testing.T) {
 
 	if vm.stack.Peek() != 42 {
 		t.Fatalf("incorrect value on stack. got %d but it should be 42", vm.stack.Peek())
+	}
+}
+
+func TestVM_LOAD(t *testing.T) {
+	program := []int{
+		ICONST, 1,
+		ICONST, 2,
+		LOAD, 1,
+		HALT,
+	}
+	vm := NewVM(program)
+	vm.Run()
+
+	if vm.stack.Peek() != 2 {
+		t.Fatalf("top element on stack is %d but it should be 2", vm.stack.Peek())
+	}
+
+	if vm.stack.Size() != 3 {
+		t.Fatalf("the size of the stack is %d but it should be 3", vm.stack.Size())
+	}
+}
+
+func TestVM_STORE(t *testing.T) {
+	program := []int{
+		ICONST, 1,
+		ICONST, 2,
+		STORE, 1,
+		HALT,
+	}
+	vm := NewVM(program)
+	vm.Run()
+
+	if len(vm.locals) != 1 {
+		t.Fatalf("the size of the locals should be 1. got %d", len(vm.locals))
+	}
+
+	if vm.stack.Size() != 1 {
+		t.Fatalf("the size of the stack should be 1. got %d", vm.stack.Size())
 	}
 }

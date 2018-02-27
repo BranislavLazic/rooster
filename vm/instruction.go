@@ -15,6 +15,7 @@ const (
 	GLOAD
 	GSTORE
 	LOAD
+	STORE
 	PRINT
 	HALT
 )

@@ -8,8 +8,10 @@ import (
 type VM struct {
 	stack              *Stack
 	instructionPointer int
+	stackPointer       int
+	framePointer       int
 	program            []int
-	globals            map[int]int
+	locals             map[int]int
 }
 
 // NewVM initializes the virtual machine
@@ -17,8 +19,9 @@ func NewVM(program []int) *VM {
 	return &VM{
 		stack:              NewStack(),
 		instructionPointer: -1,
+		framePointer:       0,
 		program:            program,
-		globals:            make(map[int]int),
+		locals:             make(map[int]int),
 	}
 }
 
@@ -82,13 +85,24 @@ func (vm *VM) Run() {
 			break
 		case GLOAD:
 			address := vm.fetch()
-			globalValue := vm.globals[address]
+			globalValue := vm.locals[address]
 			vm.stack.Push(globalValue)
 			break
 		case GSTORE:
 			value := vm.stack.Pop()
 			address := vm.fetch()
-			vm.globals[address] = value
+			vm.locals[address] = value
+			break
+		// Puts the value from the stack on top of the stack relative to frame pointer
+		case LOAD:
+			offset := vm.fetch()
+			vm.stack.Push(vm.stack.AtIndex(vm.framePointer + offset))
+			break
+		// Removes the value from top of the stack and sets it to the globals relative to frame pointer
+		case STORE:
+			value := vm.stack.Pop()
+			offset := vm.fetch()
+			vm.locals[vm.framePointer+offset] = value
 			break
 		case PRINT:
 			fmt.Println(vm.stack.Pop())

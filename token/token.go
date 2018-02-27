@@ -18,6 +18,8 @@ const (
 	ILT    = "ILT"
 	GLOAD  = "GLOAD"
 	GSTORE = "GSTORE"
+	LOAD   = "LOAD"
+	STORE  = "STORE"
 	PRINT  = "PRINT"
 	HALT   = "HALT"
 )
@@ -34,6 +36,8 @@ var instructions = map[string]string{
 	"ILT":    ILT,
 	"GLOAD":  GLOAD,
 	"GSTORE": GSTORE,
+	"LOAD":   LOAD,
+	"STORE":  STORE,
 	"PRINT":  PRINT,
 	"HALT":   HALT,
 }

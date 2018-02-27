@@ -1,5 +1,7 @@
 package vm
 
+import "strconv"
+
 // Stack is a representation of stack indexed collection
 type Stack struct {
 	values []int
@@ -38,4 +40,12 @@ func (s *Stack) Pop() int {
 // AtIndex returns a value which is at provided index
 func (s *Stack) AtIndex(index int) int {
 	return s.values[index]
+}
+
+func (s *Stack) ToString() string {
+	var value string
+	for i := s.size - 1; i >= 0; i-- {
+		value += "| " + strconv.Itoa(i) + "\t|\t" + strconv.Itoa(s.values[i]) + " |\n"
+	}
+	return value
 }

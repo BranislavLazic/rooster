@@ -63,6 +63,12 @@ func tokenToInstruction(t token.Token) int {
 	case token.GSTORE:
 		instruction = vm.GSTORE
 		break
+	case token.LOAD:
+		instruction = vm.GSTORE
+		break
+	case token.STORE:
+		instruction = vm.GSTORE
+		break
 	case token.PRINT:
 		instruction = vm.PRINT
 		break
