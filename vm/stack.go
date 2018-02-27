@@ -43,7 +43,7 @@ func (s *Stack) AtIndex(index int) int {
 }
 
 func (s *Stack) ToString() string {
-	var value string
+	value := "Stack:\n"
 	for i := s.size - 1; i >= 0; i-- {
 		value += "| " + strconv.Itoa(i) + "\t|\t" + strconv.Itoa(s.values[i]) + " |\n"
 	}

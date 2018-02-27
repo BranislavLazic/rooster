@@ -12,6 +12,7 @@ type VM struct {
 	framePointer       int
 	program            []int
 	locals             map[int]int
+	flags              map[string]interface{}
 }
 
 // NewVM initializes the virtual machine
@@ -22,6 +23,7 @@ func NewVM(program []int) *VM {
 		framePointer:       0,
 		program:            program,
 		locals:             make(map[int]int),
+		flags:              make(map[string]interface{}),
 	}
 }
 
@@ -112,8 +114,17 @@ func (vm *VM) Run() {
 		default:
 			break
 		}
+
+		if vm.flags["printStack"].(bool) {
+			fmt.Println(vm.stack.ToString())
+		}
 	}
 
+}
+
+// SetFlags sets the flags for virtual machine
+func (vm *VM) SetFlags(flags map[string]interface{}) {
+	vm.flags = flags
 }
 
 func (vm *VM) fetch() int {
