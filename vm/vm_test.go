@@ -271,7 +271,7 @@ func TestVM_JMPF_NotFalse(t *testing.T) {
 }
 
 func TestVM_GSTORE(t *testing.T) {
-	// Size of the locals space should be 1 since value at 0 address is set for both 42 and 43
+	// Size of the globals space should be 1 since value at 0 address is set for both 42 and 43
 	program := []int{
 		ICONST, 42,
 		GSTORE, 0,
@@ -286,12 +286,12 @@ func TestVM_GSTORE(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 0", vm.stack.Size())
 	}
 
-	if len(vm.locals) != 1 {
-		t.Fatalf("incorrect size of locals space. size of locals space is %d but is should be 1", len(vm.locals))
+	if len(vm.globals) != 1 {
+		t.Fatalf("incorrect size of globals space. size of globals space is %d but is should be 1", len(vm.globals))
 	}
 
-	if vm.locals[0] != 43 {
-		t.Fatalf("incorrect value at 0 address. value is %d but it should be 43", vm.locals[0])
+	if vm.globals[0] != 43 {
+		t.Fatalf("incorrect value at 0 address. value is %d but it should be 43", vm.globals[0])
 	}
 }
 
@@ -343,8 +343,8 @@ func TestVM_STORE(t *testing.T) {
 	vm := NewVM(program)
 	vm.Run()
 
-	if len(vm.locals) != 1 {
-		t.Fatalf("the size of the locals should be 1. got %d", len(vm.locals))
+	if len(vm.globals) != 1 {
+		t.Fatalf("the size of the globals should be 1. got %d", len(vm.globals))
 	}
 
 	if vm.stack.Size() != 1 {

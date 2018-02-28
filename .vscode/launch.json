@@ -15,7 +15,7 @@
             "program": "${fileDirname}",
             "env": {},
             "args": [
-                "-sourceFile=programs/program.rcode"
+                "-sourceFile=programs/function.rcode"
             ],
             "showLog": true
         }

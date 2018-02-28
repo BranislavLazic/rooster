@@ -1,0 +1,11 @@
+ICONST 7    # 0 - first argument of procedure
+ICONST 9    # 2 - second arg.
+CALL 8 2    # 4 - store args in the local memory of procedures frame 
+HALT        # 7
+
+# Procedure body
+LOAD 0    # 8  - load arg. with 0 index from local memory
+LOAD 1    # 10 - load arg. with 1 index
+IADD      # 12 - add them
+PRINT     # 13 - print result of addition
+RET       # 14 - return to next instruction after CALL

@@ -20,6 +20,8 @@ const (
 	GSTORE = "GSTORE"
 	LOAD   = "LOAD"
 	STORE  = "STORE"
+	CALL   = "CALL"
+	RET    = "RET"
 	PRINT  = "PRINT"
 	HALT   = "HALT"
 )
@@ -38,6 +40,8 @@ var instructions = map[string]string{
 	"GSTORE": GSTORE,
 	"LOAD":   LOAD,
 	"STORE":  STORE,
+	"CALL":   CALL,
+	"RET":    RET,
 	"PRINT":  PRINT,
 	"HALT":   HALT,
 }

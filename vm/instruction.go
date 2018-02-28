@@ -16,6 +16,8 @@ const (
 	GSTORE
 	LOAD
 	STORE
+	CALL
+	RET
 	PRINT
 	HALT
 )
