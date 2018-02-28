@@ -9,7 +9,7 @@ type VM struct {
 	stack              *Stack
 	instructionPointer int
 	program            []int
-	globals            [1024]int
+	globals            map[int]int
 	frames             *FrameStack
 	flags              map[string]interface{}
 }
@@ -20,6 +20,7 @@ func NewVM(program []int) *VM {
 		stack:              NewStack(),
 		instructionPointer: -1,
 		program:            program,
+		globals:            make(map[int]int),
 		frames:             NewFrameStack(),
 		flags: map[string]interface{}{
 			"printStack": false,
@@ -114,7 +115,7 @@ func (vm *VM) Run() {
 		case CALL:
 			jump := vm.fetch()
 			argsToLoad := vm.fetch()
-			frame := &Frame{returnAddress: vm.instructionPointer}
+			frame := &Frame{returnAddress: vm.instructionPointer, variables: make(map[int]int)}
 			for i := 0; i < argsToLoad; i++ {
 				frame.variables[vm.stack.Size()-1] = vm.stack.Pop()
 			}

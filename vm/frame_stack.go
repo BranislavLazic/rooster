@@ -1,7 +1,7 @@
 package vm
 
 type Frame struct {
-	variables     [1024]int
+	variables     map[int]int
 	returnAddress int
 }
 
