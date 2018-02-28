@@ -7,7 +7,7 @@ type Frame struct {
 
 // FrameStack is a representation of FrameStack indexed collection
 type FrameStack struct {
-	values []Frame
+	values []*Frame
 	size   int
 }
 
@@ -18,13 +18,13 @@ func NewFrameStack() *FrameStack {
 
 // Push adds new element on top of the FrameStack
 func (s *FrameStack) Push(value *Frame) {
-	s.values = append(s.values[:s.size], *value)
+	s.values = append(s.values[:s.size], value)
 	s.size++
 }
 
 // Peek returns the top element in FrameStack
 func (s *FrameStack) Peek() *Frame {
-	return &s.values[0]
+	return s.values[s.size-1]
 }
 
 // Size returns the number of elements in the FrameStack
@@ -37,10 +37,5 @@ func (s *FrameStack) Pop() *Frame {
 	s.size--
 	popValue := s.values[s.size]
 	s.values = s.values[:s.size]
-	return &popValue
-}
-
-// AtIndex returns a value which is at provided index
-func (s *FrameStack) AtIndex(index int) *Frame {
-	return &s.values[index]
+	return popValue
 }
