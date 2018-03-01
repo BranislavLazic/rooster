@@ -27,7 +27,7 @@ func TestVM_PRINT(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 0 {
-		t.Fatalf("value is still present on stack. stack size is %d", vm.stack.Size())
+		t.Fatalf("value is still present on stack. got=%d", vm.stack.Size())
 	}
 }
 
@@ -42,7 +42,7 @@ func TestVM_PRINT_TwoIntegers(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 1 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
 	}
 }
 
@@ -57,11 +57,11 @@ func TestVM_IADD(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 1 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
 	}
 
 	if vm.stack.Peek() != 85 {
-		t.Fatalf("incorrect result. result is %d but it should be 85", vm.stack.Peek())
+		t.Fatalf("incorrect result of addition. got=%d but it should be 85", vm.stack.Peek())
 	}
 }
 
@@ -76,11 +76,11 @@ func TestVM_ISUB(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 1 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
 	}
 
 	if vm.stack.Peek() != 2 {
-		t.Fatalf("incorrect result. result is %d but it should be 2", vm.stack.Peek())
+		t.Fatalf("incorrect result of substraction. got=%d but it should be 2", vm.stack.Peek())
 	}
 }
 
@@ -95,11 +95,11 @@ func TestVM_IMUL(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 1 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
 	}
 
 	if vm.stack.Peek() != 8 {
-		t.Fatalf("incorrect result. result is %d but it should be 8", vm.stack.Peek())
+		t.Fatalf("incorrect result of multiplication. got=%d but it should be 8", vm.stack.Peek())
 	}
 }
 
@@ -114,11 +114,11 @@ func TestVM_ILT(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 1 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
 	}
 
 	if vm.stack.Peek() != 1 {
-		t.Fatalf("incorrect result. result is %d but it should be 1", vm.stack.Peek())
+		t.Fatalf("incorrect result. got=%d but it should be 1", vm.stack.Peek())
 	}
 }
 
@@ -133,11 +133,11 @@ func TestVM_ILT_NotLessThan(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 1 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
 	}
 
 	if vm.stack.Peek() != 0 {
-		t.Fatalf("incorrect result. result is %d but it should be 0", vm.stack.Peek())
+		t.Fatalf("incorrect result. got=%d but it should be 0", vm.stack.Peek())
 	}
 }
 
@@ -152,11 +152,11 @@ func TestVM_IEQ(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 1 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
 	}
 
 	if vm.stack.Peek() != 1 {
-		t.Fatalf("incorrect result. result is %d but it should be 1", vm.stack.Peek())
+		t.Fatalf("incorrect result. got=%d but it should be 1", vm.stack.Peek())
 	}
 }
 
@@ -171,11 +171,11 @@ func TestVM_IEQ_NotEqual(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 1 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
 	}
 
 	if vm.stack.Peek() != 0 {
-		t.Fatalf("incorrect result. result is %d but it should be 0", vm.stack.Peek())
+		t.Fatalf("incorrect result. got=%d but it should be 0", vm.stack.Peek())
 	}
 }
 
@@ -193,7 +193,7 @@ func TestVM_JMP(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 2 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 2", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 2", vm.stack.Size())
 	}
 }
 
@@ -212,7 +212,7 @@ func TestVM_JMPT(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 0 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 0", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 0", vm.stack.Size())
 	}
 }
 
@@ -230,7 +230,7 @@ func TestVM_JMPT_NotTrue(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 2 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 2", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 2", vm.stack.Size())
 	}
 }
 
@@ -248,7 +248,7 @@ func TestVM_JMPF(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 0 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 0", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 0", vm.stack.Size())
 	}
 }
 
@@ -266,7 +266,7 @@ func TestVM_JMPF_NotFalse(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 2 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 2", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 2", vm.stack.Size())
 	}
 }
 
@@ -283,15 +283,15 @@ func TestVM_GSTORE(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 0 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 0", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 0", vm.stack.Size())
 	}
 
 	if len(vm.globals) != 1 {
-		t.Fatalf("incorrect size of globals space. size of globals space is %d but is should be 1", len(vm.globals))
+		t.Fatalf("incorrect size of globals space. got=%d but is should be 1", len(vm.globals))
 	}
 
 	if vm.globals[0] != 43 {
-		t.Fatalf("incorrect value at 0 address. value is %d but it should be 43", vm.globals[0])
+		t.Fatalf("incorrect value at 0 address. got=%d but it should be 43", vm.globals[0])
 	}
 }
 
@@ -306,10 +306,66 @@ func TestVM_GLOAD(t *testing.T) {
 	vm.Run()
 
 	if vm.stack.Size() != 1 {
-		t.Fatalf("incorrect size of the stack. stack size is %d but it should be 1", vm.stack.Size())
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
 	}
 
 	if vm.stack.Peek() != 42 {
-		t.Fatalf("incorrect value on stack. got %d but it should be 42", vm.stack.Peek())
+		t.Fatalf("incorrect value on stack. got=%d but it should be 42", vm.stack.Peek())
+	}
+}
+
+func TestVM_CALL(t *testing.T) {
+	// First procedure will load 50 and 43 and add them,
+	// then the second procedure will be called from the body
+	// of the first procedure which will load 42 and just print.
+	program := []int{
+		ICONST, 42,
+		ICONST, 43,
+		ICONST, 50,
+		CALL, 10, 2,
+		HALT,
+		// First procedure
+		LOAD, 0,
+		LOAD, 1,
+		IADD,
+		PRINT,
+		CALL, 20, 1,
+		RET,
+		// Second procedure
+		LOAD, 0,
+		PRINT,
+		RET,
+	}
+	vm := NewVM(program)
+	vm.Run()
+
+	if vm.frameStack.Size() != 0 {
+		t.Fatalf("incorrect size of the frame stack. got=%d but it should be 0", vm.frameStack.Size())
+	}
+
+	if vm.stack.Size() != 0 {
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 0", vm.stack.Size())
+	}
+}
+
+func TestVM_CALL_with_STORE(t *testing.T) {
+	program := []int{
+		ICONST, 42,
+		CALL, 6, 0,
+		HALT,
+		// First procedure
+		STORE, 0,
+		LOAD, 0,
+		PRINT,
+		RET,
+	}
+	vm := NewVM(program)
+	vm.Run()
+	if vm.frameStack.Size() != 0 {
+		t.Fatalf("incorrect size of the frame stack. got=%d but it should be 0", vm.frameStack.Size())
+	}
+
+	if vm.stack.Size() != 0 {
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 0", vm.stack.Size())
 	}
 }

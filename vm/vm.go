@@ -10,7 +10,7 @@ type VM struct {
 	instructionPointer int
 	program            []int
 	globals            map[int]int
-	frames             *FrameStack
+	frameStack         *FrameStack
 	flags              map[string]interface{}
 }
 
@@ -21,7 +21,7 @@ func NewVM(program []int) *VM {
 		instructionPointer: -1,
 		program:            program,
 		globals:            make(map[int]int),
-		frames:             NewFrameStack(),
+		frameStack:         NewFrameStack(),
 		flags: map[string]interface{}{
 			"printStack": false,
 		},
@@ -100,12 +100,13 @@ func (vm *VM) Run() {
 		case STORE:
 			value := vm.stack.Pop()
 			address := vm.fetch()
-			vm.frames.Peek().variables[address] = value
+			vm.frameStack.Peek().variables[address] = value
 			break
 		// Load value from locals
 		case LOAD:
 			address := vm.fetch()
-			vm.stack.Push(vm.frames.Peek().variables[address])
+			frame := vm.frameStack.Peek()
+			vm.stack.Push(frame.variables[address])
 			break
 		// After CALL instruction has been processed, the next instruction is
 		// set as an address of the instruction pointer (to perform "jump"),
@@ -117,14 +118,14 @@ func (vm *VM) Run() {
 			argsToLoad := vm.fetch()
 			frame := &Frame{returnAddress: vm.instructionPointer, variables: make(map[int]int)}
 			for i := 0; i < argsToLoad; i++ {
-				frame.variables[vm.stack.Size()-1] = vm.stack.Pop()
+				frame.variables[i] = vm.stack.Pop()
 			}
-			vm.frames.Push(frame)
+			vm.frameStack.Push(frame)
 			vm.instructionPointer = jump - 1
 			break
 		case RET:
-			returnAddress := vm.frames.Peek().returnAddress
-			vm.frames.Pop()
+			returnAddress := vm.frameStack.Peek().returnAddress
+			vm.frameStack.Pop()
 			vm.instructionPointer = returnAddress
 		case PRINT:
 			fmt.Println(vm.stack.Pop())
