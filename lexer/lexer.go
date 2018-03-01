@@ -6,11 +6,12 @@ type Lexer struct {
 	input        string
 	position     int
 	readPosition int
+	lineNumber   int
 	ch           byte
 }
 
 func NewLexer(input string) *Lexer {
-	lexer := &Lexer{input: input}
+	lexer := &Lexer{input: input, lineNumber: 1}
 	lexer.readChar()
 	return lexer
 }
@@ -21,30 +22,38 @@ func (l *Lexer) NextToken() token.Token {
 	switch l.ch {
 	// Comments
 	case '#':
-		for l.ch != '\n' && l.ch != 0 {
-			l.readChar()
-		}
-		tok.Literal = ""
+		tok.Literal = l.readComment()
 		tok.Type = token.COMMENT
-
+		tok.LineNumber = l.lineNumber
 	case '\n':
 		tok.Literal = ""
 		tok.Type = token.EOL
+		tok.LineNumber = l.lineNumber
+		l.lineNumber++
+	case '\r':
+		tok.Literal = ""
+		tok.Type = token.EOL
+		tok.LineNumber = l.lineNumber
+		l.lineNumber++
 	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF
+		tok.LineNumber = l.lineNumber
 	default:
 		if isLetter(l.ch) {
 			tok.Literal = l.readInstruction()
 			tok.Type = token.LookupInstruction(tok.Literal)
+			tok.LineNumber = l.lineNumber
 		} else if isDigit(l.ch) {
 			tok.Literal = l.readNumber()
 			tok.Type = token.INT
+			tok.LineNumber = l.lineNumber
 			return tok
 		} else {
 			tok = token.Token{
-				Type:    token.ILLEGAL,
-				Literal: string(l.ch),
+				Type:       token.ILLEGAL,
+				Literal:    string(l.ch),
+				LineNumber: l.lineNumber,
 			}
 		}
 	}
@@ -77,6 +86,14 @@ func (l *Lexer) readInstruction() string {
 	return l.input[position:l.position]
 }
 
+func (l *Lexer) readComment() string {
+	position := l.position
+	for l.nextChar() != '\n' && l.nextChar() != 0 {
+		l.readChar()
+	}
+	return l.input[position:l.position]
+}
+
 func (l *Lexer) readNumber() string {
 	position := l.position
 	for isDigit(l.ch) {
@@ -94,7 +111,7 @@ func isDigit(ch byte) bool {
 }
 
 func (l *Lexer) skipWhitespace() {
-	for l.ch == ' ' || l.ch == '\t' || l.ch == '\r' {
+	for l.ch == ' ' || l.ch == '\t' {
 		l.readChar()
 	}
 }

@@ -16,7 +16,7 @@ func Program(sourceCode string) []int {
 	lxr := lexer.NewLexer(sourceCode)
 	for tok := lxr.NextToken(); tok.Type != token.EOF; tok = lxr.NextToken() {
 		if isSyntaxError(tok) {
-			log.Fatalf("%s is not a valid syntax", tok.Literal)
+			log.Fatalf("Line %d: %s is not a valid syntax", tok.LineNumber, tok.Literal)
 			os.Exit(1)
 		}
 		if isValidToken(tok) {

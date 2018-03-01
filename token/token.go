@@ -54,6 +54,7 @@ func LookupInstruction(instruction string) string {
 }
 
 type Token struct {
-	Type    string
-	Literal string
+	Type       string
+	Literal    string
+	LineNumber int
 }
