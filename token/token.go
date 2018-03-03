@@ -1,11 +1,13 @@
 package token
 
 const (
-	INT     = "INT"
-	EOL     = "EOL"
-	EOF     = "EOF"
-	COMMENT = "COMMENT"
-	ILLEGAL = "ILLEGAL"
+	INT        = "INT"
+	EOL        = "EOL"
+	EOF        = "EOF"
+	COMMENT    = "COMMENT"
+	LABEL_NAME = "LABEL_NAME"
+	LABEL      = "LABEL"
+	ILLEGAL    = "ILLEGAL"
 	// Instructions
 	ICONST = "ICONST"
 	IADD   = "IADD"
@@ -16,6 +18,7 @@ const (
 	JMPF   = "JMPF"
 	IEQ    = "IEQ"
 	ILT    = "ILT"
+	DUPL   = "DUPL"
 	GLOAD  = "GLOAD"
 	GSTORE = "GSTORE"
 	LOAD   = "LOAD"
@@ -36,6 +39,7 @@ var instructions = map[string]string{
 	"JMPF":   JMPF,
 	"IEQ":    IEQ,
 	"ILT":    ILT,
+	"DUPL":   DUPL,
 	"GLOAD":  GLOAD,
 	"GSTORE": GSTORE,
 	"LOAD":   LOAD,
@@ -57,4 +61,5 @@ type Token struct {
 	Type       string
 	Literal    string
 	LineNumber int
+	Index      int
 }

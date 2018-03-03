@@ -10,8 +10,9 @@ const (
 	JMP
 	JMPT
 	JMPF
-	IEQ
 	ILT
+	IEQ
+	DUPL
 	GLOAD
 	GSTORE
 	LOAD

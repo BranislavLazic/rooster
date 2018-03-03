@@ -270,6 +270,21 @@ func TestVM_JMPF_NotFalse(t *testing.T) {
 	}
 }
 
+func TestVM_DUPL(t *testing.T) {
+	program := []int{
+		ICONST, 42,
+		DUPL,
+		PRINT,
+		HALT,
+	}
+	vm := NewVM(program)
+	vm.Run()
+
+	if vm.stack.Size() != 1 {
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
+	}
+}
+
 func TestVM_GSTORE(t *testing.T) {
 	// Size of the globals space should be 1 since value at 0 address is set for both 42 and 43
 	program := []int{

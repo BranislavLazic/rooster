@@ -86,6 +86,12 @@ func (vm *VM) Run() {
 				vm.stack.Push(0)
 			}
 			break
+		// Makes a duplicate of stack top value and puts it
+		// back on the stack as a new top value
+		case DUPL:
+			topValue := vm.stack.Peek()
+			vm.stack.Push(topValue)
+			break
 		case GLOAD:
 			address := vm.fetch()
 			globalValue := vm.globals[address]
@@ -96,13 +102,14 @@ func (vm *VM) Run() {
 			address := vm.fetch()
 			vm.globals[address] = value
 			break
-		// Pop the value from the stack and store it in locals
+		// Pop the value from the stack and store it in the local memory
+		// of the current frame
 		case STORE:
 			value := vm.stack.Pop()
 			address := vm.fetch()
 			vm.frameStack.Peek().variables[address] = value
 			break
-		// Load value from locals
+		// Load value from the local memory of the current frame
 		case LOAD:
 			address := vm.fetch()
 			frame := vm.frameStack.Peek()

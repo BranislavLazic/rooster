@@ -14,15 +14,24 @@ import (
 func Program(sourceCode string) []int {
 	var instructions []int
 	lxr := lexer.NewLexer(sourceCode)
+
+	// Collect all tokens
+	var tokens []token.Token
 	for tok := lxr.NextToken(); tok.Type != token.EOF; tok = lxr.NextToken() {
-		if isSyntaxError(tok) {
+		tokens = append(tokens, tok)
+	}
+
+	// Filter and transfer them to opcode instructions
+	for _, tok := range tokens {
+		tok = findLabel(tok, tokens)
+		if tok.Type == token.ILLEGAL {
 			log.Fatalf("Line %d: %s is not a valid syntax", tok.LineNumber, tok.Literal)
 			os.Exit(1)
 		}
+
 		if isValidToken(tok) {
 			instructions = append(instructions, tokenToInstruction(tok))
 		}
-
 	}
 	return instructions
 }
@@ -57,6 +66,9 @@ func tokenToInstruction(t token.Token) int {
 	case token.ILT:
 		instruction = vm.ILT
 		break
+	case token.DUPL:
+		instruction = vm.DUPL
+		break
 	case token.GLOAD:
 		instruction = vm.GLOAD
 		break
@@ -87,10 +99,20 @@ func tokenToInstruction(t token.Token) int {
 	return instruction
 }
 
-func isSyntaxError(tok token.Token) bool {
-	return tok.Type == token.ILLEGAL
+func isValidToken(tok token.Token) bool {
+	return tok.Type != token.EOL && tok.Type != token.EOF && tok.Type != token.COMMENT && tok.Type != token.LABEL
 }
 
-func isValidToken(tok token.Token) bool {
-	return tok.Type != token.EOL && tok.Type != token.EOF && tok.Type != token.COMMENT
+// Find label names and replace them with opcode index
+func findLabel(tok token.Token, tokens []token.Token) token.Token {
+	if tok.Type == token.LABEL_NAME {
+		for _, tk := range tokens {
+			if tk.Type == token.LABEL && tok.Literal == tk.Literal {
+				tok.Type = token.INT
+				tok.Literal = strconv.Itoa(tk.Index)
+				break
+			}
+		}
+	}
+	return tok
 }
