@@ -18,7 +18,7 @@ const (
 	JMPF   = "JMPF"
 	IEQ    = "IEQ"
 	ILT    = "ILT"
-	DUPL   = "DUPL"
+	COPY   = "COPY"
 	GLOAD  = "GLOAD"
 	GSTORE = "GSTORE"
 	LOAD   = "LOAD"
@@ -39,7 +39,7 @@ var instructions = map[string]string{
 	"JMPF":   JMPF,
 	"IEQ":    IEQ,
 	"ILT":    ILT,
-	"DUPL":   DUPL,
+	"COPY":   COPY,
 	"GLOAD":  GLOAD,
 	"GSTORE": GSTORE,
 	"LOAD":   LOAD,

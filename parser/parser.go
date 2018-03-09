@@ -66,8 +66,8 @@ func tokenToInstruction(t token.Token) int {
 	case token.ILT:
 		instruction = vm.ILT
 		break
-	case token.DUPL:
-		instruction = vm.DUPL
+	case token.COPY:
+		instruction = vm.COPY
 		break
 	case token.GLOAD:
 		instruction = vm.GLOAD
