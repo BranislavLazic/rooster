@@ -88,7 +88,7 @@ func (vm *VM) Run() {
 			break
 		// Makes a duplicate of stack top value and puts it
 		// back on the stack as a new top value
-		case DUPL:
+		case COPY:
 			topValue := vm.stack.Peek()
 			vm.stack.Push(topValue)
 			break

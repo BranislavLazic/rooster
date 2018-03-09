@@ -270,10 +270,10 @@ func TestVM_JMPF_NotFalse(t *testing.T) {
 	}
 }
 
-func TestVM_DUPL(t *testing.T) {
+func TestVM_COPY(t *testing.T) {
 	program := []int{
 		ICONST, 42,
-		DUPL,
+		COPY,
 		PRINT,
 		HALT,
 	}

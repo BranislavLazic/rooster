@@ -12,7 +12,7 @@ const (
 	JMPF
 	ILT
 	IEQ
-	DUPL
+	COPY
 	GLOAD
 	GSTORE
 	LOAD
