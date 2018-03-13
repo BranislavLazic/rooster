@@ -43,9 +43,10 @@ func (s *Stack) AtIndex(index int) int {
 }
 
 func (s *Stack) ToString() string {
-	value := "Stack:\n"
+	value := "\033[92m--------------- Stack ---------------\033[00m\n"
 	for i := s.size - 1; i >= 0; i-- {
-		value += "" + strconv.Itoa(i) + "\t" + strconv.Itoa(s.values[i]) + "\t\n"
+		value += "\033[93m" + strconv.Itoa(i) + "|\t" + strconv.Itoa(s.values[i]) + "\033[00m\t\n"
 	}
+	value += "\033[92m-------------------------------------\033[00m\n"
 	return value
 }
