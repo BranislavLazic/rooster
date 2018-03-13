@@ -8,7 +8,7 @@ Build executable:
 
 and execute programs:
 
-`./rooster program.rcode`
+`./rooster -sourceFile=program.rcode`
 
 Example of program that adds two numbers and prints the result:
 
