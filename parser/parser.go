@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -19,6 +20,10 @@ func Program(sourceCode string) []int {
 	var tokens []token.Token
 	for tok := lxr.NextToken(); tok.Type != token.EOF; tok = lxr.NextToken() {
 		tokens = append(tokens, tok)
+	}
+
+	for _, tok1 := range tokens {
+		fmt.Printf("%v\n", tok1)
 	}
 
 	// Filter and transfer them to opcode instructions

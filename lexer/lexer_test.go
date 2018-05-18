@@ -9,7 +9,10 @@ import (
 func TestLexer_NextToken(t *testing.T) {
 	input := `ICONST 7 # Push number 7 on the stack
 	ICONST 10 # Push number 10 on the stack
-	IADD
+	printStuff:
+	LOAD 0
+	PRINT
+	RET
 	HALT`
 	lexer := NewLexer(input)
 	tests := []struct {
@@ -24,7 +27,15 @@ func TestLexer_NextToken(t *testing.T) {
 		{token.INT, "10"},
 		{token.COMMENT, "# Push number 10 on the stack"},
 		{token.EOL, ""},
-		{token.IADD, "IADD"},
+		{token.LABEL, "printStuff"},
+		{token.EOL, ""},
+		{token.LOAD, "LOAD"},
+		{token.INT, "0"},
+		{token.EOL, ""},
+		{token.PRINT, "PRINT"},
+		{token.EOL, ""},
+		{token.RET, "RET"},
+		{token.EOL, ""},
 		{token.HALT, "HALT"},
 		{token.EOF, ""},
 	}

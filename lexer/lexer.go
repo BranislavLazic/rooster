@@ -49,6 +49,7 @@ func (l *Lexer) NextToken() token.Token {
 			tok.LineNumber = l.lineNumber
 			l.index++
 			tok.Index = l.index
+			return tok
 		} else if isLowercaseLetter(l.ch) {
 			l.index++
 			tok = l.readLabelToken()
@@ -58,6 +59,7 @@ func (l *Lexer) NextToken() token.Token {
 			tok.LineNumber = l.lineNumber
 			l.index++
 			tok.Index = l.index
+			return tok
 		} else {
 			l.index++
 			tok = token.Token{
