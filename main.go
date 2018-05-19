@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/BranislavLazic/rooster/lexer"
 	"github.com/BranislavLazic/rooster/parser"
 	"github.com/BranislavLazic/rooster/vm"
 )
@@ -37,7 +38,8 @@ func main() {
 		"printStack": *printStack,
 	}
 
-	program := parser.Program(string(fileContent))
+	lexer := lexer.NewLexer(string(fileContent))
+	program := parser.Program(lexer)
 	virtualMachine := vm.NewVM(program)
 	virtualMachine.SetFlags(flags)
 	virtualMachine.Run()

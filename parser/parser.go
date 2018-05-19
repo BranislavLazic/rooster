@@ -11,9 +11,8 @@ import (
 )
 
 // Program converts source code to array of instructions
-func Program(sourceCode string) []int {
+func Program(lxr *lexer.Lexer) []int {
 	var instructions []int
-	lxr := lexer.NewLexer(sourceCode)
 
 	// Collect all tokens
 	var tokens []token.Token
