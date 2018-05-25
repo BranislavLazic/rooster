@@ -10,21 +10,21 @@ CALL addNums 2    # Call the first procedure that adds two top numbers from the 
 HALT
 
 addNums:
-# Load two top numbers from frame's local memory and puts them on top of the stack
-LOAD 0
-LOAD 1
-IADD
-PRINT
-CALL justPrint 1
-RET
+    # Load two top numbers from frame's local memory and puts them on top of the stack
+    LOAD 0
+    LOAD 1
+    IADD
+    PRINT
+    CALL justPrint 1
+    RET
 
 justPrint:
-LOAD 0
-PRINT
-CALL printAgain 1
-RET
+    LOAD 0
+    PRINT
+    CALL printAgain 1
+    RET
 
 printAgain:
-LOAD 0
-PRINT
-RET
+    LOAD 0
+    PRINT
+    RET
