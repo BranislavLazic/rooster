@@ -10,17 +10,19 @@ type VM struct {
 	instructionPointer int
 	program            []int
 	globals            map[int]int
+	constantPool       map[int]interface{}
 	frameStack         *FrameStack
 	flags              map[string]interface{}
 }
 
 // NewVM initializes the virtual machine
-func NewVM(program []int) *VM {
+func NewVM(program []int, constantPool map[int]interface{}) *VM {
 	return &VM{
 		stack:              NewStack(),
 		instructionPointer: -1,
 		program:            program,
 		globals:            make(map[int]int),
+		constantPool:       constantPool,
 		frameStack:         NewFrameStack(),
 		flags: map[string]interface{}{
 			"printStack": false,

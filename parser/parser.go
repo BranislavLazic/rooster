@@ -11,7 +11,8 @@ import (
 )
 
 // Program converts source code to array of instructions
-func Program(lxr *lexer.Lexer) []int {
+func Program(lxr *lexer.Lexer, cp *map[int]interface{}) []int {
+	// TODO: implement constant pool
 	var instructions []int
 
 	// Collect all tokens

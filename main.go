@@ -39,8 +39,9 @@ func main() {
 	}
 
 	lexer := lexer.NewLexer(string(fileContent))
-	program := parser.Program(lexer)
-	virtualMachine := vm.NewVM(program)
+	constantPool := make(map[int]interface{})
+	program := parser.Program(lexer, &constantPool)
+	virtualMachine := vm.NewVM(program, constantPool)
 	virtualMachine.SetFlags(flags)
 	virtualMachine.Run()
 }
