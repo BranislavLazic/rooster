@@ -41,58 +41,40 @@ func tokenToInstruction(t token.Token) int {
 	switch t.Literal {
 	case token.ICONST:
 		instruction = vm.ICONST
-		break
 	case token.IADD:
 		instruction = vm.IADD
-		break
 	case token.ISUB:
 		instruction = vm.ISUB
-		break
 	case token.IMUL:
 		instruction = vm.IMUL
-		break
 	case token.JMP:
 		instruction = vm.JMP
-		break
 	case token.JMPT:
 		instruction = vm.JMPT
-		break
 	case token.JMPF:
 		instruction = vm.JMPF
-		break
 	case token.IEQ:
 		instruction = vm.IEQ
-		break
 	case token.ILT:
 		instruction = vm.ILT
-		break
 	case token.COPY:
 		instruction = vm.COPY
-		break
 	case token.GLOAD:
 		instruction = vm.GLOAD
-		break
 	case token.GSTORE:
 		instruction = vm.GSTORE
-		break
 	case token.LOAD:
 		instruction = vm.LOAD
-		break
 	case token.STORE:
 		instruction = vm.STORE
-		break
 	case token.CALL:
 		instruction = vm.CALL
-		break
 	case token.RET:
 		instruction = vm.RET
-		break
 	case token.PRINT:
 		instruction = vm.PRINT
-		break
 	case token.HALT:
 		instruction = vm.HALT
-		break
 	default:
 		instruction, _ = strconv.Atoi(t.Literal)
 	}
