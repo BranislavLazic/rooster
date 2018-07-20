@@ -141,7 +141,7 @@ func (l *Lexer) readComment() string {
 
 func (l *Lexer) readString() string {
 	position := l.position
-	for l.nextChar() != '"' && l.readPosition < len(l.input) {
+	for l.nextChar() != '"' && l.nextChar() != '\n' {
 		l.readChar()
 	}
 	result := l.input[position+1 : l.position+1]
