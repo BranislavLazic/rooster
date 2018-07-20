@@ -51,3 +51,30 @@ func TestLexer_NextToken(t *testing.T) {
 		}
 	}
 }
+
+func TestLexer_String(t *testing.T) {
+	input := `SCONST "_test123"
+	HALT`
+	lexer := NewLexer(input)
+	tests := []struct {
+		expectedType    string
+		expectedLiteral string
+	}{
+		{token.SCONST, "SCONST"},
+		{token.STRING, "_test123"},
+		{token.EOL, ""},
+		{token.HALT, "HALT"},
+		{token.EOF, ""},
+	}
+
+	for i, tokenType := range tests {
+		tok := lexer.NextToken()
+		if tok.Type != tokenType.expectedType {
+			t.Fatalf("tests[%d] - token type wrong. expected=%q, got=%q", i, tokenType.expectedType, tok.Type)
+		}
+
+		if tok.Literal != tokenType.expectedLiteral {
+			t.Fatalf("tests[%d] - literal wrong. expected=%q, got=%q", i, tokenType.expectedLiteral, tok.Literal)
+		}
+	}
+}

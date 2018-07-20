@@ -2,6 +2,7 @@ package token
 
 const (
 	INT        = "INT"
+	STRING     = "STRING"
 	EOL        = "EOL"
 	EOF        = "EOF"
 	COMMENT    = "COMMENT"
@@ -10,6 +11,7 @@ const (
 	ILLEGAL    = "ILLEGAL"
 	// Instructions
 	ICONST = "ICONST"
+	SCONST = "SCONST"
 	IADD   = "IADD"
 	ISUB   = "ISUB"
 	IMUL   = "IMUL"
@@ -31,6 +33,7 @@ const (
 
 var instructions = map[string]string{
 	"ICONST": ICONST,
+	"SCONST": SCONST,
 	"IADD":   IADD,
 	"ISUB":   ISUB,
 	"IMUL":   IMUL,

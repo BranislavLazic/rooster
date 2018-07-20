@@ -40,6 +40,9 @@ func (vm *VM) Run() {
 		case ICONST:
 			value := vm.fetch()
 			vm.stack.Push(value)
+		case SCONST:
+			value := vm.fetch()
+			vm.stack.Push(value)
 		case IADD:
 			addResult := vm.stack.Pop() + vm.stack.Pop()
 			vm.stack.Push(addResult)

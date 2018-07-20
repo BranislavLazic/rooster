@@ -28,6 +28,12 @@ func (l *Lexer) NextToken() token.Token {
 		tok.Literal = l.readComment()
 		tok.Type = token.COMMENT
 		tok.LineNumber = l.lineNumber
+	case '"':
+		tok.Literal = l.readString()
+		tok.Type = token.STRING
+		tok.LineNumber = l.lineNumber
+		l.index++
+		tok.Index = l.index
 	case '\n':
 		tok.Literal = ""
 		tok.Type = token.EOL
@@ -131,6 +137,17 @@ func (l *Lexer) readComment() string {
 		l.readChar()
 	}
 	return l.input[position : l.position+1]
+}
+
+func (l *Lexer) readString() string {
+	position := l.position
+	for l.nextChar() != '"' && l.readPosition < len(l.input) {
+		l.readChar()
+	}
+	result := l.input[position+1 : l.position+1]
+	l.position = l.readPosition
+	l.readPosition++
+	return result
 }
 
 func (l *Lexer) readNumber() string {

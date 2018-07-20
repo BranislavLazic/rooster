@@ -1,0 +1,3 @@
+SCONST "Test string"
+PRINT
+HALT

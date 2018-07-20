@@ -4,6 +4,7 @@ package vm
 const (
 	_ = iota
 	ICONST
+	SCONST
 	IADD
 	ISUB
 	IMUL

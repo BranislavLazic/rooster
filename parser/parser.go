@@ -41,6 +41,8 @@ func tokenToInstruction(t token.Token) int {
 	switch t.Literal {
 	case token.ICONST:
 		instruction = vm.ICONST
+	case token.SCONST:
+		instruction = vm.SCONST
 	case token.IADD:
 		instruction = vm.IADD
 	case token.ISUB:
