@@ -1,6 +1,7 @@
 package token
 
 const (
+	// Types
 	INT        = "INT"
 	STRING     = "STRING"
 	EOL        = "EOL"
@@ -28,6 +29,7 @@ const (
 	CALL   = "CALL"
 	RET    = "RET"
 	PRINT  = "PRINT"
+	PRINTC = "PRINTC"
 	HALT   = "HALT"
 )
 
@@ -50,6 +52,7 @@ var instructions = map[string]string{
 	"CALL":   CALL,
 	"RET":    RET,
 	"PRINT":  PRINT,
+	"PRINTC": PRINTC,
 	"HALT":   HALT,
 }
 

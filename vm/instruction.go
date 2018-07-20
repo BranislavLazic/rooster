@@ -20,6 +20,10 @@ const (
 	STORE
 	CALL
 	RET
+	// Use to print value from stack
 	PRINT
+	// Use to print value from constant pool which value is
+	// identified by an index from stack
+	PRINTC
 	HALT
 )

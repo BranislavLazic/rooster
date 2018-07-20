@@ -11,7 +11,7 @@ import (
 )
 
 // Program converts source code to array of instructions
-func Program(lxr *lexer.Lexer, cp *map[int]interface{}) []int {
+func Program(lxr *lexer.Lexer, constantPool map[int]interface{}) []int {
 	// TODO: implement constant pool
 	var instructions []int
 
@@ -22,11 +22,19 @@ func Program(lxr *lexer.Lexer, cp *map[int]interface{}) []int {
 	}
 
 	// Filter and transfer them to opcode instructions
-	for _, tok := range tokens {
+	for idx, tok := range tokens {
 		tok = findLabel(tok, tokens)
 		if tok.Type == token.ILLEGAL {
 			log.Fatalf("Line %d: %s is not a valid syntax", tok.LineNumber, tok.Literal)
 			os.Exit(1)
+		}
+
+		// If value belongs to constant pool, set instruction as
+		// the index of that value and push the value into the constant pool
+		if tok.Type == token.STRING {
+			constantPool[idx] = tok.Literal
+			instructions = append(instructions, idx)
+			continue
 		}
 
 		if isValidToken(tok) {
@@ -75,6 +83,8 @@ func tokenToInstruction(t token.Token) int {
 		instruction = vm.RET
 	case token.PRINT:
 		instruction = vm.PRINT
+	case token.PRINTC:
+		instruction = vm.PRINTC
 	case token.HALT:
 		instruction = vm.HALT
 	default:

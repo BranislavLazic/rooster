@@ -15,7 +15,7 @@
             "program": "${fileDirname}",
             "env": {},
             "args": [
-                "-sourceFile=programs/procedure.rcode"
+                "-sourceFile=programs/constants.rcode"
             ],
             "showLog": true
         }

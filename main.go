@@ -40,7 +40,7 @@ func main() {
 
 	lexer := lexer.NewLexer(string(fileContent))
 	constantPool := make(map[int]interface{})
-	program := parser.Program(lexer, &constantPool)
+	program := parser.Program(lexer, constantPool)
 	virtualMachine := vm.NewVM(program, constantPool)
 	virtualMachine.SetFlags(flags)
 	virtualMachine.Run()

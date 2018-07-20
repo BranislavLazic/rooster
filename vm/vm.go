@@ -126,6 +126,9 @@ func (vm *VM) Run() {
 			vm.instructionPointer = returnAddress
 		case PRINT:
 			fmt.Println(vm.stack.Pop())
+		// Print value from constant pool with the index poped from stack
+		case PRINTC:
+			fmt.Println(vm.constantPool[vm.stack.Pop()])
 		case HALT:
 			return
 		default:
