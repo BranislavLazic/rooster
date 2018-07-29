@@ -384,3 +384,19 @@ func TestVM_CALL_with_STORE(t *testing.T) {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 0", vm.stack.Size())
 	}
 }
+
+func TestVM_PRINTC(t *testing.T) {
+	program := []int{
+		SCONST, 1,
+		PRINTC,
+		HALT,
+	}
+	constantPool := make(map[int]interface{})
+	constantPool[1] = "Hello world!"
+	vm := NewVM(program, constantPool)
+	vm.Run()
+
+	if vm.stack.Size() != 0 {
+		t.Fatalf("value is still present on stack. got=%d", vm.stack.Size())
+	}
+}
