@@ -1,6 +1,7 @@
 package vm
 
 import (
+	"os"
 	"testing"
 )
 
@@ -11,7 +12,7 @@ func TestVM_ICONST(t *testing.T) {
 	}
 
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 	if vm.stack.Peek() != 42 {
 		t.Fatalf("incorrect value on the stack. got=%d", vm.stack.Peek())
 	}
@@ -24,7 +25,7 @@ func TestVM_PRINT(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 0 {
 		t.Fatalf("value is still present on stack. got=%d", vm.stack.Size())
@@ -39,7 +40,7 @@ func TestVM_PRINT_TwoIntegers(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -54,7 +55,7 @@ func TestVM_IADD(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -73,7 +74,7 @@ func TestVM_ISUB(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -92,7 +93,7 @@ func TestVM_IMUL(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -111,7 +112,7 @@ func TestVM_ILT(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -130,7 +131,7 @@ func TestVM_ILT_NotLessThan(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -149,7 +150,7 @@ func TestVM_IEQ(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -168,7 +169,7 @@ func TestVM_IEQ_NotEqual(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -190,7 +191,7 @@ func TestVM_JMP(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 2 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 2", vm.stack.Size())
@@ -209,7 +210,7 @@ func TestVM_JMPT(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 0 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 0", vm.stack.Size())
@@ -227,7 +228,7 @@ func TestVM_JMPT_NotTrue(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 2 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 2", vm.stack.Size())
@@ -245,7 +246,7 @@ func TestVM_JMPF(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 0 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 0", vm.stack.Size())
@@ -263,7 +264,7 @@ func TestVM_JMPF_NotFalse(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 2 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 2", vm.stack.Size())
@@ -278,7 +279,7 @@ func TestVM_COPY(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -295,7 +296,7 @@ func TestVM_GSTORE(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 0 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 0", vm.stack.Size())
@@ -318,7 +319,7 @@ func TestVM_GLOAD(t *testing.T) {
 		HALT,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 1 {
 		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
@@ -352,7 +353,7 @@ func TestVM_CALL(t *testing.T) {
 		RET,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.frameStack.Size() != 0 {
 		t.Fatalf("incorrect size of the frame stack. got=%d but it should be 0", vm.frameStack.Size())
@@ -375,7 +376,7 @@ func TestVM_CALL_with_STORE(t *testing.T) {
 		RET,
 	}
 	vm := NewVM(program, make(map[int]interface{}))
-	vm.Run()
+	vm.Run(os.Stdout)
 	if vm.frameStack.Size() != 0 {
 		t.Fatalf("incorrect size of the frame stack. got=%d but it should be 0", vm.frameStack.Size())
 	}
@@ -394,7 +395,7 @@ func TestVM_PRINTC(t *testing.T) {
 	constantPool := make(map[int]interface{})
 	constantPool[1] = "Hello world!"
 	vm := NewVM(program, constantPool)
-	vm.Run()
+	vm.Run(os.Stdout)
 
 	if vm.stack.Size() != 0 {
 		t.Fatalf("value is still present on stack. got=%d", vm.stack.Size())
