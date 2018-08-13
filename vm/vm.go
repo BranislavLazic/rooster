@@ -2,6 +2,7 @@ package vm
 
 import (
 	"fmt"
+	"io"
 )
 
 // VM contains properties of CPU
@@ -32,7 +33,7 @@ func NewVM(program []int, constantPool map[int]interface{}) *VM {
 
 // Run runs the virtual machine and interprets its
 // program by executing instruction after instruction
-func (vm *VM) Run() {
+func (vm *VM) Run(w io.Writer) {
 
 	for vm.instructionPointer < len(vm.program) {
 		opcode := vm.fetch()
@@ -125,10 +126,10 @@ func (vm *VM) Run() {
 			vm.frameStack.Pop()
 			vm.instructionPointer = returnAddress
 		case PRINT:
-			fmt.Println(vm.stack.Pop())
+			fmt.Fprintf(w, "%d\n", vm.stack.Pop())
 		// Print value from constant pool with the index poped from stack
 		case PRINTC:
-			fmt.Println(vm.constantPool[vm.stack.Pop()])
+			fmt.Fprintf(w, "%v\n", vm.constantPool[vm.stack.Pop()])
 		case HALT:
 			return
 		default:

@@ -43,5 +43,5 @@ func main() {
 	program := parser.Program(lexer, constantPool)
 	virtualMachine := vm.NewVM(program, constantPool)
 	virtualMachine.SetFlags(flags)
-	virtualMachine.Run()
+	virtualMachine.Run(os.Stdout)
 }
