@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestVM_ICONST(t *testing.T) {
+func TestICONST(t *testing.T) {
 	program := []int{
 		ICONST, 42,
 		HALT,
@@ -18,7 +18,7 @@ func TestVM_ICONST(t *testing.T) {
 	}
 }
 
-func TestVM_PRINT(t *testing.T) {
+func TestPRINT(t *testing.T) {
 	program := []int{
 		ICONST, 42,
 		PRINT,
@@ -32,7 +32,7 @@ func TestVM_PRINT(t *testing.T) {
 	}
 }
 
-func TestVM_PRINT_TwoIntegers(t *testing.T) {
+func TestPRINT_TwoIntegers(t *testing.T) {
 	program := []int{
 		ICONST, 42,
 		ICONST, 43,
@@ -47,7 +47,7 @@ func TestVM_PRINT_TwoIntegers(t *testing.T) {
 	}
 }
 
-func TestVM_IADD(t *testing.T) {
+func TestIADD(t *testing.T) {
 	program := []int{
 		ICONST, 42,
 		ICONST, 43,
@@ -66,7 +66,7 @@ func TestVM_IADD(t *testing.T) {
 	}
 }
 
-func TestVM_ISUB(t *testing.T) {
+func TestISUB(t *testing.T) {
 	program := []int{
 		ICONST, 2,
 		ICONST, 4,
@@ -85,7 +85,7 @@ func TestVM_ISUB(t *testing.T) {
 	}
 }
 
-func TestVM_IMUL(t *testing.T) {
+func TestIMUL(t *testing.T) {
 	program := []int{
 		ICONST, 2,
 		ICONST, 4,
@@ -104,7 +104,7 @@ func TestVM_IMUL(t *testing.T) {
 	}
 }
 
-func TestVM_ILT(t *testing.T) {
+func TestILT(t *testing.T) {
 	program := []int{
 		ICONST, 4,
 		ICONST, 2,
@@ -123,7 +123,7 @@ func TestVM_ILT(t *testing.T) {
 	}
 }
 
-func TestVM_ILT_NotLessThan(t *testing.T) {
+func TestILT_NotLessThan(t *testing.T) {
 	program := []int{
 		ICONST, 4,
 		ICONST, 7,
@@ -142,7 +142,7 @@ func TestVM_ILT_NotLessThan(t *testing.T) {
 	}
 }
 
-func TestVM_IEQ(t *testing.T) {
+func TestIEQ(t *testing.T) {
 	program := []int{
 		ICONST, 4,
 		ICONST, 4,
@@ -161,7 +161,7 @@ func TestVM_IEQ(t *testing.T) {
 	}
 }
 
-func TestVM_IEQ_NotEqual(t *testing.T) {
+func TestIEQ_NotEqual(t *testing.T) {
 	program := []int{
 		ICONST, 4,
 		ICONST, 6,
@@ -180,7 +180,7 @@ func TestVM_IEQ_NotEqual(t *testing.T) {
 	}
 }
 
-func TestVM_JMP(t *testing.T) {
+func TestJMP(t *testing.T) {
 	// Expect that stack size will be 2 since ICONST 7 and ICONST 8 will be skipped
 	program := []int{
 		ICONST, 4,
@@ -198,7 +198,7 @@ func TestVM_JMP(t *testing.T) {
 	}
 }
 
-func TestVM_JMPT(t *testing.T) {
+func TestJMPT(t *testing.T) {
 	// Expect that stack size will be 0 since the ICONST 7 and ICONST 8 will be skipped
 	program := []int{
 		ICONST, 4,
@@ -217,7 +217,7 @@ func TestVM_JMPT(t *testing.T) {
 	}
 }
 
-func TestVM_JMPT_NotTrue(t *testing.T) {
+func TestJMPT_NotTrue(t *testing.T) {
 	program := []int{
 		ICONST, 4,
 		ICONST, 3,
@@ -235,7 +235,7 @@ func TestVM_JMPT_NotTrue(t *testing.T) {
 	}
 }
 
-func TestVM_JMPF(t *testing.T) {
+func TestJMPF(t *testing.T) {
 	program := []int{
 		ICONST, 4,
 		ICONST, 3,
@@ -253,7 +253,7 @@ func TestVM_JMPF(t *testing.T) {
 	}
 }
 
-func TestVM_JMPF_NotFalse(t *testing.T) {
+func TestJMPF_NotFalse(t *testing.T) {
 	program := []int{
 		ICONST, 4,
 		ICONST, 4,
@@ -271,7 +271,7 @@ func TestVM_JMPF_NotFalse(t *testing.T) {
 	}
 }
 
-func TestVM_COPY(t *testing.T) {
+func TestCOPY(t *testing.T) {
 	program := []int{
 		ICONST, 42,
 		COPY,
@@ -286,7 +286,7 @@ func TestVM_COPY(t *testing.T) {
 	}
 }
 
-func TestVM_GSTORE(t *testing.T) {
+func TestGSTORE(t *testing.T) {
 	// Size of the globals space should be 1 since value at 0 address is set for both 42 and 43
 	program := []int{
 		ICONST, 42,
@@ -311,7 +311,7 @@ func TestVM_GSTORE(t *testing.T) {
 	}
 }
 
-func TestVM_GLOAD(t *testing.T) {
+func TestGLOAD(t *testing.T) {
 	program := []int{
 		ICONST, 42,
 		GSTORE, 0,
@@ -330,7 +330,7 @@ func TestVM_GLOAD(t *testing.T) {
 	}
 }
 
-func TestVM_CALL(t *testing.T) {
+func TestCALL(t *testing.T) {
 	// First procedure will load 50 and 43 and add them,
 	// then the second procedure will be called from the body
 	// of the first procedure which will load 42 and just print.
@@ -364,7 +364,7 @@ func TestVM_CALL(t *testing.T) {
 	}
 }
 
-func TestVM_CALL_with_STORE(t *testing.T) {
+func TestCALL_with_STORE(t *testing.T) {
 	program := []int{
 		ICONST, 42,
 		CALL, 6, 0,
@@ -386,7 +386,7 @@ func TestVM_CALL_with_STORE(t *testing.T) {
 	}
 }
 
-func TestVM_PRINTC(t *testing.T) {
+func TestPRINTC(t *testing.T) {
 	program := []int{
 		SCONST, 1,
 		PRINTC,
