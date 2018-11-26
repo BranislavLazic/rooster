@@ -16,6 +16,7 @@ const (
 	IADD   = "IADD"
 	ISUB   = "ISUB"
 	IMUL   = "IMUL"
+	IDIV   = "IDIV"
 	JMP    = "JMP"
 	JMPT   = "JMPT"
 	JMPF   = "JMPF"
@@ -39,6 +40,7 @@ var instructions = map[string]string{
 	"IADD":   IADD,
 	"ISUB":   ISUB,
 	"IMUL":   IMUL,
+	"IDUV":   IDIV,
 	"JMP":    JMP,
 	"JMPT":   JMPT,
 	"JMPF":   JMPF,

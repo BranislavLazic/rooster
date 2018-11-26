@@ -8,6 +8,7 @@ const (
 	IADD
 	ISUB
 	IMUL
+	IDIV
 	JMP
 	JMPT
 	JMPF

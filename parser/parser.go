@@ -57,6 +57,8 @@ func tokenToInstruction(t token.Token) int {
 		instruction = vm.ISUB
 	case token.IMUL:
 		instruction = vm.IMUL
+	case token.IDIV:
+		instruction = vm.IDIV
 	case token.JMP:
 		instruction = vm.JMP
 	case token.JMPT:

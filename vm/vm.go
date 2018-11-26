@@ -53,6 +53,9 @@ func (vm *VM) Run(w io.Writer) {
 		case IMUL:
 			mulResult := vm.stack.Pop() * vm.stack.Pop()
 			vm.stack.Push(mulResult)
+		case IDIV:
+			divResult := vm.stack.Pop() / vm.stack.Pop()
+			vm.stack.Push(divResult)
 		// "Jump" to instruction pointer unconditionally. E.g. JMP 2 sets the instruction
 		// pointer to 2 and starts executing program from that point.
 		case JMP:
