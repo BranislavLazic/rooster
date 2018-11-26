@@ -104,6 +104,25 @@ func TestIMUL(t *testing.T) {
 	}
 }
 
+func TestIDIV(t *testing.T) {
+	program := []int{
+		ICONST, 2,
+		ICONST, 4,
+		IDIV,
+		HALT,
+	}
+	vm := NewVM(program, make(map[int]interface{}))
+	vm.Run(os.Stdout)
+
+	if vm.stack.Size() != 1 {
+		t.Fatalf("incorrect size of the stack. got=%d but it should be 1", vm.stack.Size())
+	}
+
+	if vm.stack.Peek() != 2 {
+		t.Fatalf("incorrect result of multiplication. got=%d but it should be 2", vm.stack.Peek())
+	}
+}
+
 func TestILT(t *testing.T) {
 	program := []int{
 		ICONST, 4,
