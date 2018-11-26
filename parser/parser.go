@@ -12,7 +12,6 @@ import (
 
 // Program converts source code to array of instructions
 func Program(lxr *lexer.Lexer, constantPool map[int]interface{}) []int {
-	// TODO: implement constant pool
 	var instructions []int
 
 	// Collect all tokens
@@ -29,7 +28,7 @@ func Program(lxr *lexer.Lexer, constantPool map[int]interface{}) []int {
 			os.Exit(1)
 		}
 
-		// If value belongs to constant pool, set instruction as
+		// If the value should be in the constant pool, set the instruction as
 		// the index of that value and push the value into the constant pool
 		if tok.Type == token.STRING {
 			constantPool[idx] = tok.Literal
