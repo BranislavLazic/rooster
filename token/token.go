@@ -1,15 +1,15 @@
 package token
 
+// Types
 const (
-	// Types
-	INT        = "INT"
-	STRING     = "STRING"
-	EOL        = "EOL"
-	EOF        = "EOF"
-	COMMENT    = "COMMENT"
-	LABEL_NAME = "LABEL_NAME"
-	LABEL      = "LABEL"
-	ILLEGAL    = "ILLEGAL"
+	INT       = "INT"
+	STRING    = "STRING"
+	EOL       = "EOL"
+	EOF       = "EOF"
+	COMMENT   = "COMMENT"
+	LabelName = "LABEL_NAME"
+	LABEL     = "LABEL"
+	ILLEGAL   = "ILLEGAL"
 	// Instructions
 	ICONST = "ICONST"
 	SCONST = "SCONST"

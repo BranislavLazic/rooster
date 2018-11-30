@@ -10,9 +10,15 @@ import (
 	"github.com/BranislavLazic/rooster/vm"
 )
 
+// HTTP methods
+const (
+	POST = "POST"
+	GET  = "GET"
+)
+
 func handleExecution(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	case "POST":
+	case POST:
 		err := r.ParseForm()
 		if err != nil {
 			log.Fatalf("failed to parse body")
@@ -23,13 +29,13 @@ func handleExecution(w http.ResponseWriter, r *http.Request) {
 		program := parser.Program(lexer, constantPool)
 		virtualMachine := vm.NewVM(program, constantPool)
 		virtualMachine.Run(w)
-	case "GET":
+	case GET:
 		fmt.Fprintf(w, "Rooster server up and running")
 	}
 }
 
 // StartServer starts HTTP server which executes rcode via
-// simple HTTP request
+// HTTP request
 func StartServer(port int) {
 	http.HandleFunc("/", handleExecution)
 	done := make(chan bool)

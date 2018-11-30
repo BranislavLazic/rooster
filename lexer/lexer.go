@@ -107,7 +107,7 @@ func (l *Lexer) readInstruction() string {
 
 func (l *Lexer) readLabelToken() token.Token {
 	var tokenType string
-	tokenType = token.LABEL_NAME
+	tokenType = token.LabelName
 	position := l.position
 	for isLetter(l.ch) {
 		if l.nextChar() == ':' {

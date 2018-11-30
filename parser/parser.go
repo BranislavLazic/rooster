@@ -100,7 +100,7 @@ func isValidToken(tok token.Token) bool {
 
 // Find label names and replace them with opcode index
 func findLabel(tok token.Token, tokens []token.Token) token.Token {
-	if tok.Type == token.LABEL_NAME {
+	if tok.Type == token.LabelName {
 		for _, tk := range tokens {
 			if tk.Type == token.LABEL && tok.Literal == tk.Literal {
 				tok.Type = token.INT
