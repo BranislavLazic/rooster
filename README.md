@@ -19,6 +19,43 @@ IADD         # 4 - add numbers
 PRINT        # 5 - print the result of addition
 HALT         # 6 - stop the program
 ```
+
+More complex example that demonstrates calculation of product recursively:
+
+```
+# Use of recursion to calculate a product of numbers
+ICONST 1
+GSTORE 0 # Set initial accumulation value to 1
+
+# Push four values on stack
+ICONST 1
+ICONST 2
+ICONST 3
+ICONST 4
+
+# Call "product" procedure recursively until the stack is depleted
+CALL product 1
+
+# After the stack is depleted, load value from global memory
+GLOAD 0
+# And print it out
+PRINT
+HALT
+
+product:
+    # Load initial accumulation value from global memory
+    GLOAD 0
+    # Load value from frame stack
+    LOAD 0
+    # Multiply value from global memory and the one from frame stack
+    IMUL
+    # Put the result in the same address in global memory
+    GSTORE 0
+    # Repeat
+    JMP 12
+    RET
+```
+
 More examples can be found in `programs` directory.
 
 # Working principle

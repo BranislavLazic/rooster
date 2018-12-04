@@ -26,7 +26,7 @@ func NewVM(program []int, constantPool map[int]interface{}) *VM {
 		constantPool:       constantPool,
 		frameStack:         NewFrameStack(),
 		flags: map[string]interface{}{
-			"printStack": false,
+			"debug": false,
 		},
 	}
 }
@@ -119,11 +119,18 @@ func (vm *VM) Run(w io.Writer) {
 			jump := vm.fetch()
 			argsToLoad := vm.fetch()
 			frame := &Frame{returnAddress: vm.instructionPointer, variables: make(map[int]int)}
-			for i := 0; i < argsToLoad; i++ {
-				frame.variables[i] = vm.stack.Pop()
+			// Skip arguments loading in case that stack is empty
+			if vm.stack.Size() > 0 {
+				for i := 0; i < argsToLoad; i++ {
+					frame.variables[i] = vm.stack.Pop()
+				}
+				vm.frameStack.Push(frame)
+				vm.instructionPointer = jump - 1
+			} else {
+				vm.debug(func() {
+					fmt.Println("Stack is empty. Skipping loading of value.")
+				})
 			}
-			vm.frameStack.Push(frame)
-			vm.instructionPointer = jump - 1
 		case RET:
 			returnAddress := vm.frameStack.Peek().returnAddress
 			vm.frameStack.Pop()
@@ -138,10 +145,9 @@ func (vm *VM) Run(w io.Writer) {
 		default:
 			return
 		}
-
-		if vm.flags["printStack"].(bool) {
+		vm.debug(func() {
 			fmt.Println(vm.stack.ToString())
-		}
+		})
 	}
 
 }
@@ -154,4 +160,10 @@ func (vm *VM) SetFlags(flags map[string]interface{}) {
 func (vm *VM) fetch() int {
 	vm.instructionPointer++
 	return vm.program[vm.instructionPointer]
+}
+
+func (vm *VM) debug(body func()) {
+	if vm.flags["debug"].(bool) {
+		body()
+	}
 }

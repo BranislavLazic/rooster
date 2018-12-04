@@ -18,7 +18,7 @@ import (
 func main() {
 	// Read source file
 	fileName := flag.String("sourceFile", "", "Source code file with the rcode extension")
-	printStack := flag.Bool("printStack", false, "Prints the state of the stack")
+	debug := flag.Bool("debug", false, "Runs VM in debug mode")
 	startServer := flag.Bool("server", false, "Start HTTP server for remove execution")
 	serverPort := flag.Int("serverPort", 8000, "HTTP server port")
 	flag.Parse()
@@ -40,7 +40,7 @@ func main() {
 
 		// Read flags
 		flags := map[string]interface{}{
-			"printStack": *printStack,
+			"debug": *debug,
 		}
 		lexer := lexer.NewLexer(string(fileContent))
 		constantPool := make(map[int]interface{})
