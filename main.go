@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -26,16 +25,13 @@ func main() {
 		if *fileName == "" {
 			flag.PrintDefaults()
 			log.Fatalf("source file must be provided via sourceFile flag")
-			os.Exit(1)
 		}
 		if !strings.HasSuffix(*fileName, ".rcode") {
 			log.Fatalf("invalid file name. extension must be rcode")
-			os.Exit(1)
 		}
 		fileContent, err := ioutil.ReadFile(*fileName)
 		if err != nil {
-			fmt.Print(err)
-			os.Exit(1)
+			log.Fatalf("cannot read file")
 		}
 
 		// Read flags

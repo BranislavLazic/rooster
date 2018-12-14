@@ -21,14 +21,16 @@ func handleExecution(w http.ResponseWriter, r *http.Request) {
 	case POST:
 		err := r.ParseForm()
 		if err != nil {
-			log.Fatalf("failed to parse body")
+			w.WriteHeader(405)
+			fmt.Fprintf(w, "")
+		} else {
+			rcode := r.PostFormValue("rcode")
+			lxr := lexer.NewLexer(rcode)
+			constantPool := make(map[int]interface{})
+			program := parser.Program(lxr, constantPool)
+			virtualMachine := vm.NewVM(program, constantPool)
+			virtualMachine.Run(w)
 		}
-		rcode := r.PostFormValue("rcode")
-		lexer := lexer.NewLexer(rcode)
-		constantPool := make(map[int]interface{})
-		program := parser.Program(lexer, constantPool)
-		virtualMachine := vm.NewVM(program, constantPool)
-		virtualMachine.Run(w)
 	case GET:
 		fmt.Fprintf(w, "Rooster server up and running")
 	}
