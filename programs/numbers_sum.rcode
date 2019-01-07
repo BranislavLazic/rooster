@@ -8,24 +8,17 @@ ICONST 2
 ICONST 3
 ICONST 4
 
-# Call "product" procedure recursively until the stack is depleted
-CALL product 1
 
-# After the stack is depleted, load value from global memory
-GLOAD 0
-# And print it out
-PRINT
+CALL product 1 # Call "product" procedure recursively until the stack is depleted
+GLOAD 0        # After the stack is depleted, load value from global memory
+PRINT          # And print it out
 HALT
 
 product:
-    # Load initial accumulation value from global memory
-    GLOAD 0
-    # Load value from frame stack
-    LOAD 0
-    # Multiply value from global memory and the one from frame stack
-    IMUL
-    # Put the result in the same address in global memory
-    GSTORE 0
-    # Repeat
-    JMP 12
+    
+    GLOAD  0 # Load initial accumulation value from global memory
+    LOAD   0 # Load value from frame stack
+    IMUL     # Multiply value from global memory and the one from frame stack
+    GSTORE 0 # Put the result in the same address in global memory
+    JMP   12 # Repeat
     RET
