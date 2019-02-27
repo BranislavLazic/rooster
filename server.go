@@ -1,13 +1,13 @@
-package server
+package main
 
 import (
 	"fmt"
 	"log"
 	"net/http"
 
-	"github.com/BranislavLazic/rooster/lexer"
-	"github.com/BranislavLazic/rooster/parser"
-	"github.com/BranislavLazic/rooster/vm"
+	"github.com/BranislavLazic/rooster/cmd/rooster/lexer"
+	"github.com/BranislavLazic/rooster/cmd/rooster/parser"
+	"github.com/BranislavLazic/rooster/cmd/rooster/vm"
 )
 
 // HTTP methods
