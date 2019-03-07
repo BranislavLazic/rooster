@@ -5,7 +5,7 @@ import (
 )
 
 func TestPush(t *testing.T) {
-	stack := createStackWithElements()
+	stack := createIntStackWithElements()
 
 	if stack.Size() != 3 {
 		t.Fatalf("stack.Push does not contain 3 elements, got=%d", stack.Size())
@@ -13,7 +13,7 @@ func TestPush(t *testing.T) {
 }
 
 func TestPeek(t *testing.T) {
-	stack := createStackWithElements()
+	stack := createIntStackWithElements()
 
 	peekResult := stack.Peek()
 
@@ -23,7 +23,7 @@ func TestPeek(t *testing.T) {
 }
 
 func TestPop(t *testing.T) {
-	stack := createStackWithElements()
+	stack := createIntStackWithElements()
 
 	popResult := stack.Pop()
 
@@ -36,8 +36,8 @@ func TestPop(t *testing.T) {
 	}
 }
 
-func createStackWithElements() *Stack {
-	stack := NewStack()
+func createIntStackWithElements() *IntStack {
+	stack := NewIntStack()
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(3)

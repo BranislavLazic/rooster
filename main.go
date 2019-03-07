@@ -39,12 +39,12 @@ func main() {
 		flags := map[string]interface{}{
 			"debug": *debug,
 		}
-		lexer := lexer.NewLexer(string(fileContent))
+		lxr := lexer.NewLexer(string(fileContent))
 		constantPool := make(map[int]interface{})
-		program := parser.Program(lexer, constantPool)
-		virtualMachine := vm.NewVM(program, constantPool)
-		virtualMachine.SetFlags(flags)
-		virtualMachine.Run(os.Stdout)
+		program := parser.Program(lxr, constantPool)
+		vMachine := vm.NewVM(program, constantPool)
+		vMachine.SetFlags(flags)
+		vMachine.Run(os.Stdout)
 	} else {
 		StartServer(*serverPort)
 	}

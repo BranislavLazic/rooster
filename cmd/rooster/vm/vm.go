@@ -7,7 +7,7 @@ import (
 
 // VM contains properties of CPU
 type VM struct {
-	stack              *Stack
+	stack              *IntStack
 	instructionPointer int
 	program            []int
 	globals            map[int]int
@@ -19,7 +19,7 @@ type VM struct {
 // NewVM initializes the virtual machine
 func NewVM(program []int, constantPool map[int]interface{}) *VM {
 	return &VM{
-		stack:              NewStack(),
+		stack:              NewIntStack(),
 		instructionPointer: -1,
 		program:            program,
 		globals:            make(map[int]int),
@@ -137,7 +137,7 @@ func (vm *VM) Run(w io.Writer) {
 			vm.instructionPointer = returnAddress
 		case PRINT:
 			fmt.Fprintf(w, "%d\n", vm.stack.Pop())
-		// Print value from constant pool with the index poped from stack
+		// Print value from constant pool with the index popped from stack
 		case PRINTC:
 			fmt.Fprintf(w, "%v\n", vm.constantPool[vm.stack.Pop()])
 		case HALT:
