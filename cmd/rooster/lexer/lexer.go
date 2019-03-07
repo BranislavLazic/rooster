@@ -13,12 +13,14 @@ type Lexer struct {
 	ch           byte
 }
 
+// NewLexer returns an initialized Lexer value
 func NewLexer(input string) *Lexer {
 	lexer := &Lexer{input: input, lineNumber: 1, index: -1}
 	lexer.readChar()
 	return lexer
 }
 
+// NextToken is returning a token lexing a given sequence of characters
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 	l.skipWhitespace()
@@ -60,8 +62,7 @@ func (l *Lexer) NextToken() token.Token {
 			l.index++
 			tok = l.readLabelToken()
 		} else if isDigit(l.ch) {
-			tok.Literal = l.readNumber()
-			tok.Type = token.INT
+			tok.Literal, tok.Type = l.readNumber()
 			tok.LineNumber = l.lineNumber
 			l.index++
 			tok.Index = l.index
@@ -106,7 +107,7 @@ func (l *Lexer) readInstruction() string {
 }
 
 func (l *Lexer) readLabelToken() token.Token {
-	var tokenType string
+	var tokenType token.TokType
 	tokenType = token.LabelName
 	position := l.position
 	for isLetter(l.ch) {
@@ -150,12 +151,29 @@ func (l *Lexer) readString() string {
 	return result
 }
 
-func (l *Lexer) readNumber() string {
+// Read either an integer or a floating point number.
+// Initially, the token type will be declared as INT.
+// The token will be declared as FLOAT only if the sequence of characters
+// contains ".". If the "." is repeated again, then the ILLEGAL token type
+// will be returned. Every floating point number must begin with number.
+// E.g: 0.5
+// Values such as ".35" are not allowed.
+func (l *Lexer) readNumber() (string, token.TokType) {
+	var tokType token.TokType = token.INT
+	dotRepeated := false
 	position := l.position
-	for isDigit(l.ch) {
+	for isDigit(l.ch) || l.ch == '.' {
+		if l.ch == '.' {
+			if !dotRepeated {
+				tokType = token.FLOAT
+				dotRepeated = true
+			} else {
+				return string(l.ch), token.ILLEGAL
+			}
+		}
 		l.readChar()
 	}
-	return l.input[position:l.position]
+	return l.input[position:l.position], tokType
 }
 
 func isUppercaseLetter(ch byte) bool {

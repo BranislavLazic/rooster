@@ -4,6 +4,7 @@ package token
 const (
 	INT       = "INT"
 	STRING    = "STRING"
+	FLOAT     = "FLOAT"
 	EOL       = "EOL"
 	EOF       = "EOF"
 	COMMENT   = "COMMENT"
@@ -13,6 +14,7 @@ const (
 	// Instructions
 	ICONST = "ICONST"
 	SCONST = "SCONST"
+	FCONST = "FCONST"
 	IADD   = "IADD"
 	ISUB   = "ISUB"
 	IMUL   = "IMUL"
@@ -34,9 +36,10 @@ const (
 	HALT   = "HALT"
 )
 
-var instructions = map[string]string{
+var instructions = map[string]TokType{
 	"ICONST": ICONST,
 	"SCONST": SCONST,
+	"FCONST": FCONST,
 	"IADD":   IADD,
 	"ISUB":   ISUB,
 	"IMUL":   IMUL,
@@ -58,15 +61,17 @@ var instructions = map[string]string{
 	"HALT":   HALT,
 }
 
-func LookupInstruction(instruction string) string {
+func LookupInstruction(instruction string) TokType {
 	if tok, ok := instructions[instruction]; ok {
 		return tok
 	}
 	return ILLEGAL
 }
 
+type TokType string
+
 type Token struct {
-	Type       string
+	Type       TokType
 	Literal    string
 	LineNumber int
 	Index      int

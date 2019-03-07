@@ -16,7 +16,7 @@ func TestLexer_NextToken(t *testing.T) {
 	HALT`
 	lexer := NewLexer(input)
 	tests := []struct {
-		expectedType    string
+		expectedType    token.TokType
 		expectedLiteral string
 	}{
 		{token.ICONST, "ICONST"},
@@ -57,7 +57,7 @@ func TestLexer_String(t *testing.T) {
 	HALT`
 	lexer := NewLexer(input)
 	tests := []struct {
-		expectedType    string
+		expectedType    token.TokType
 		expectedLiteral string
 	}{
 		{token.SCONST, "SCONST"},
@@ -65,6 +65,57 @@ func TestLexer_String(t *testing.T) {
 		{token.EOL, ""},
 		{token.HALT, "HALT"},
 		{token.EOF, ""},
+	}
+
+	for i, tokenType := range tests {
+		tok := lexer.NextToken()
+		if tok.Type != tokenType.expectedType {
+			t.Fatalf("tests[%d] - token type wrong. expected=%q, got=%q", i, tokenType.expectedType, tok.Type)
+		}
+
+		if tok.Literal != tokenType.expectedLiteral {
+			t.Fatalf("tests[%d] - literal wrong. expected=%q, got=%q", i, tokenType.expectedLiteral, tok.Literal)
+		}
+	}
+}
+
+func TestLexer_Float(t *testing.T) {
+	input := `FCONST 0.3
+	HALT`
+	lexer := NewLexer(input)
+	tests := []struct {
+		expectedType    token.TokType
+		expectedLiteral string
+	}{
+		{token.FCONST, "FCONST"},
+		{token.FLOAT, "0.3"},
+		{token.EOL, ""},
+		{token.HALT, "HALT"},
+		{token.EOF, ""},
+	}
+
+	for i, tokenType := range tests {
+		tok := lexer.NextToken()
+		if tok.Type != tokenType.expectedType {
+			t.Fatalf("tests[%d] - token type wrong. expected=%q, got=%q", i, tokenType.expectedType, tok.Type)
+		}
+
+		if tok.Literal != tokenType.expectedLiteral {
+			t.Fatalf("tests[%d] - literal wrong. expected=%q, got=%q", i, tokenType.expectedLiteral, tok.Literal)
+		}
+	}
+}
+
+func TestLexer_FloatRepeatDot(t *testing.T) {
+	input := `FCONST 0.3.3
+	HALT`
+	lexer := NewLexer(input)
+	tests := []struct {
+		expectedType    token.TokType
+		expectedLiteral string
+	}{
+		{token.FCONST, "FCONST"},
+		{token.ILLEGAL, "."},
 	}
 
 	for i, tokenType := range tests {
