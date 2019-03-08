@@ -1,3 +1,7 @@
 SCONST "Test string"
 PRINTC
+
+FCONST 3.5
+PRINTC
+
 HALT

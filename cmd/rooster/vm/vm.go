@@ -44,6 +44,9 @@ func (vm *VM) Run(w io.Writer) {
 		case SCONST:
 			value := vm.fetch()
 			vm.stack.Push(value)
+		case FCONST:
+			value := vm.fetch()
+			vm.stack.Push(value)
 		case IADD:
 			addResult := vm.stack.Pop() + vm.stack.Pop()
 			vm.stack.Push(addResult)

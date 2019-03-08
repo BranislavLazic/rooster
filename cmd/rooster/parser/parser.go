@@ -30,7 +30,7 @@ func Program(lxr *lexer.Lexer, constantPool map[int]interface{}) []int {
 
 		// If the value should be in the constant pool, set the instruction as
 		// the index of that value and push the value into the constant pool
-		if tok.Type == token.STRING {
+		if tok.Type == token.STRING || tok.Type == token.FLOAT {
 			constantPool[idx] = tok.Literal
 			instructions = append(instructions, idx)
 			continue
@@ -50,6 +50,8 @@ func tokenToInstruction(t token.Token) int {
 		instruction = vm.ICONST
 	case token.SCONST:
 		instruction = vm.SCONST
+	case token.FCONST:
+		instruction = vm.FCONST
 	case token.IADD:
 		instruction = vm.IADD
 	case token.ISUB:

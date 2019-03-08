@@ -5,6 +5,7 @@ const (
 	_ = iota
 	ICONST
 	SCONST
+	FCONST
 	IADD
 	ISUB
 	IMUL
