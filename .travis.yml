@@ -3,4 +3,4 @@ language: go
 go:
   - '1.12'
 
-script: go test ./... --bench=.
+script: go test ./... -v
