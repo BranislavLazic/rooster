@@ -4,11 +4,11 @@ Example of very primitive stack based virtual machine
 
 ## Build
 
-Execute: `go build` or `make`
+Execute: `go build ./cmd/rooster` or `make`
 
 and execute programs:
 
-`./rooster "program.rcode"`
+`./rooster program.rcode`
 
 ## Examples
 
@@ -42,7 +42,7 @@ PRINT          # And print it out
 HALT
 
 product:
-    
+
     GLOAD  0 # Load initial accumulation value from global memory
     LOAD   0 # Load value from frame stack
     IMUL     # Multiply value from global memory and the one from frame stack
@@ -55,8 +55,8 @@ More examples can be found in `examples` directory.
 
 ## Server
 
-To start HTTP server execute: `./rooster --server` and server will start at 8000 port.
-To start server on different port: `./rooster --server --serverPort=8001`
+To start HTTP server execute: `./server` and server will start at 8000 port.
+To start server on different port: `./server --port=8001`
 
 # Working principle
 

@@ -166,7 +166,9 @@ func (vm *VM) fetch() int {
 }
 
 func (vm *VM) debug(body func()) {
-	if vm.flags["debug"].(bool) {
-		body()
+	if vm.flags["debug"] != nil {
+		if vm.flags["debug"].(bool) {
+			body()
+		}
 	}
 }
