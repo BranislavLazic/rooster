@@ -1,0 +1,14 @@
+ICONST 42
+GSTORE 0    # Store to 0 address
+GLOAD 0     # Load from 0 address and push on top of the stack
+PRINT
+
+GLOAD 0     # Load again from 0 address and push on top of the stack
+PRINT
+
+ICONST 3
+GSTORE 0    # Update address 0 with the new value
+GLOAD 0
+PRINT
+
+HALT
