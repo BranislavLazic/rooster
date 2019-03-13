@@ -1,0 +1,14 @@
+# Not equal
+ICONST 1
+ICONST 3
+IEQ
+PRINT
+
+# Equal
+ICONST 6
+ICONST 6
+IEQ
+PRINT
+
+HALT
+
