@@ -7,8 +7,10 @@ import (
 	"github.com/BranislavLazic/rooster"
 )
 
-func TestEquality(t *testing.T) {
-	content, err := rooster.LoadRCodeFile("./testdata/equality.rcode")
+// TestUnconditionalJump should print only a single value (3) since
+// first value (6) will be skipped
+func TestUnconditionalJump(t *testing.T) {
+	content, err := rooster.LoadRCodeFile("./testdata/jump/unconditional_jump.rcode")
 	if err != nil {
 		t.Fatalf("cannot load an rcode file")
 	}
@@ -16,7 +18,8 @@ func TestEquality(t *testing.T) {
 	output := assertOutput(func(buf *bytes.Buffer) {
 		rooster.RunVM(content, nil, buf)
 	})
-	expectedRes := "0\n1\n"
+
+	expectedRes := "3\n"
 	if output != expectedRes {
 		t.Fatalf("test - wrong output. expected=%s, got=%s", expectedRes, output)
 	}

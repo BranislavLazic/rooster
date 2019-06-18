@@ -1,0 +1,7 @@
+ICONST 6     # 0
+ICONST 3     # 3
+
+JMP 7        # 5
+PRINT        # 6
+PRINT        # 7
+HALT         # 8
