@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/BranislavLazic/rooster"
+	"github.com/branislavlazic/rooster"
 )
 
 func TestEquality(t *testing.T) {

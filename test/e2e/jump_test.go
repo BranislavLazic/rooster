@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/BranislavLazic/rooster"
+	"github.com/branislavlazic/rooster"
 )
 
 // TestUnconditionalJump should print only a single value (3) since

@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/BranislavLazic/rooster"
+	"github.com/branislavlazic/rooster"
 )
 
 // HTTP methods

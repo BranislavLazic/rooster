@@ -7,9 +7,9 @@ import (
 	"log"
 	"strings"
 
-	"github.com/BranislavLazic/rooster/pkg/lexer"
-	"github.com/BranislavLazic/rooster/pkg/parser"
-	"github.com/BranislavLazic/rooster/pkg/vm"
+	"github.com/branislavlazic/rooster/pkg/lexer"
+	"github.com/branislavlazic/rooster/pkg/parser"
+	"github.com/branislavlazic/rooster/pkg/vm"
 )
 
 // LoadRCodeFile will try to load a file with the rcode extension.

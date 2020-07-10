@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/BranislavLazic/rooster"
+	"github.com/branislavlazic/rooster"
 )
 
 func main() {

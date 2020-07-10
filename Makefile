@@ -2,12 +2,15 @@ APP=rooster
 SERVER=rserver
 VERSION := v0.1
 
-.PHONY: clean bin
+.PHONY: clean bin test
 
-all: clean zip
+all: clean test zip
 
 clean:
 	rm -rf bin release
+
+test:
+	go test ./...
 
 zip: release/$(APP)_$(VERSION)_osx_x86_64.tar.gz release/$(APP)_$(VERSION)_linux_x86_64.tar.gz release/$(APP)_$(VERSION)_osx_x86_32.tar.gz release/$(APP)_$(VERSION)_linux_x86_32.tar.gz
 
