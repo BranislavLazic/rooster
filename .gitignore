@@ -2,5 +2,6 @@
 debug
 main
 bin/
+release/
 rooster.exe
 server.exe

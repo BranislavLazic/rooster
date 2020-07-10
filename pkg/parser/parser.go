@@ -2,7 +2,6 @@ package parser
 
 import (
 	"log"
-	"os"
 	"strconv"
 
 	"github.com/BranislavLazic/rooster/pkg/lexer"
@@ -25,7 +24,6 @@ func Program(lxr *lexer.Lexer, constantPool map[int]interface{}) []int {
 		tok = findLabel(tok, tokens)
 		if tok.Type == token.ILLEGAL {
 			log.Fatalf("Line %d: %s is not a valid syntax", tok.LineNumber, tok.Literal)
-			os.Exit(1)
 		}
 
 		// If the value should be in the constant pool, set the instruction as
