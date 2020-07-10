@@ -10,7 +10,7 @@ clean:
 	rm -rf bin release
 
 test:
-	go test ./...
+	go test ./... -v
 
 zip: release/$(APP)_$(VERSION)_osx_x86_64.tar.gz release/$(APP)_$(VERSION)_linux_x86_64.tar.gz release/$(APP)_$(VERSION)_osx_x86_32.tar.gz release/$(APP)_$(VERSION)_linux_x86_32.tar.gz
 
