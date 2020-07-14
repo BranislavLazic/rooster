@@ -1,4 +1,4 @@
-# Rooster [![Build Status](https://travis-ci.org/BranislavLazic/rooster.svg)](https://travis-ci.org/BranislavLazic/rooster)
+# Rooster
 
 Example of very primitive stack based virtual machine
 
