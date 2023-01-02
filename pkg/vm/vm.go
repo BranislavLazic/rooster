@@ -7,24 +7,24 @@ import (
 
 // VM contains properties of CPU
 type VM struct {
-	stack              *IntStack
+	stack              *Stack[int]
 	instructionPointer int
 	program            []int
 	globals            map[int]int
 	constantPool       map[int]interface{}
-	frameStack         *FrameStack
+	frameStack         *Stack[Frame]
 	flags              map[string]interface{}
 }
 
 // NewVM initializes the virtual machine
 func NewVM(program []int, constantPool map[int]interface{}) *VM {
 	return &VM{
-		stack:              NewIntStack(),
+		stack:              NewStack[int](),
 		instructionPointer: -1,
 		program:            program,
 		globals:            make(map[int]int),
 		constantPool:       constantPool,
-		frameStack:         NewFrameStack(),
+		frameStack:         NewStack[Frame](),
 		flags: map[string]interface{}{
 			"debug": false,
 		},
@@ -121,7 +121,7 @@ func (vm *VM) Run(w io.Writer) {
 		case CALL:
 			jump := vm.fetch()
 			argsToLoad := vm.fetch()
-			frame := &Frame{returnAddress: vm.instructionPointer, variables: make(map[int]int)}
+			frame := Frame{returnAddress: vm.instructionPointer, variables: make(map[int]int)}
 			// Skip arguments loading in case that stack is empty
 			if vm.stack.Size() > 0 {
 				for i := 0; i < argsToLoad; i++ {

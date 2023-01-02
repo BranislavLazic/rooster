@@ -1,3 +1,3 @@
 module github.com/branislavlazic/rooster
 
-go 1.14
+go 1.19

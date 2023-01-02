@@ -15,7 +15,6 @@ PRINT          # And print it out
 HALT
 
 product:
-    
     GLOAD  0 # Load initial accumulation value from global memory
     LOAD   0 # Load value from frame stack
     IMUL     # Multiply value from global memory and the one from frame stack

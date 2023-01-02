@@ -1,36 +1,39 @@
 package vm
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
-// IntStack is a representation of the stack of integers
-type IntStack struct {
-	values []int
+// Stack is a representation of the stack data structure
+type Stack[T any] struct {
+	values []T
 	size   int
 }
 
-// NewIntStack returns an initialized stack of integers
-func NewIntStack() *IntStack {
-	return &IntStack{size: 0}
+// NewStack returns an initialized stack of integers
+func NewStack[T any]() *Stack[T] {
+	return &Stack[T]{size: 0}
 }
 
 // Push adds new element on top of the stack
-func (s *IntStack) Push(value int) {
+func (s *Stack[T]) Push(value T) {
 	s.values = append(s.values[:s.size], value)
 	s.size++
 }
 
 // Peek returns the top element in stack
-func (s *IntStack) Peek() int {
+func (s *Stack[T]) Peek() T {
 	return s.values[s.size-1]
 }
 
 // Size returns the number of elements in the stack
-func (s *IntStack) Size() int {
+func (s *Stack[T]) Size() int {
 	return s.size
 }
 
 // Pop removes the top element and returns its value
-func (s *IntStack) Pop() int {
+func (s *Stack[T]) Pop() T {
 	s.size--
 	popValue := s.values[s.size]
 	s.values = s.values[:s.size]
@@ -38,14 +41,14 @@ func (s *IntStack) Pop() int {
 }
 
 // AtIndex returns a value which is at provided index
-func (s *IntStack) AtIndex(index int) int {
+func (s *Stack[T]) AtIndex(index int) T {
 	return s.values[index]
 }
 
-func (s *IntStack) ToString() string {
+func (s *Stack[T]) ToString() string {
 	value := "\033[92m--------------- Stack ---------------\033[00m\n"
 	for i := s.size - 1; i >= 0; i-- {
-		value += "\033[93m" + strconv.Itoa(i) + "|\t" + strconv.Itoa(s.values[i]) + "\033[00m\t\n"
+		value += "\033[93m" + strconv.Itoa(i) + "|\t" + fmt.Sprintf("%v", s.values[i]) + "\033[00m\t\n"
 	}
 	value += "\033[92m-------------------------------------\033[00m\n"
 	return value

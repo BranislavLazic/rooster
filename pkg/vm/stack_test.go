@@ -36,8 +36,8 @@ func TestPop(t *testing.T) {
 	}
 }
 
-func createIntStackWithElements() *IntStack {
-	stack := NewIntStack()
+func createIntStackWithElements() *Stack[int] {
+	stack := NewStack[int]()
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(3)
